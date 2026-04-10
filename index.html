@@ -652,9 +652,13 @@ footer {
 
 /* SCROLL REVEAL */
 .reveal {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.hidden {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 .reveal-d1 { transition-delay: 0.1s; }
@@ -711,8 +715,9 @@ footer {
       <em>het nog niet echt wordt uitgesproken.</em>
     </h1>
     <p class="hero-sub">
-      Je merkt dat het anders is dan eerst. Niet alles loopt stroef,
-      maar het voelt ook niet helemaal goed.<br>
+      Je merkt dat het anders is dan eerst.<br>
+      Niet alles loopt stroef, maar het voelt ook niet helemaal goed.<br><br>
+      En het lastige is: je weet niet precies waar het zit.<br><br>
       Ik help teams om daar woorden aan te geven — zodat er weer beweging ontstaat.
     </p>
     <div class="hero-cta">
@@ -727,6 +732,7 @@ footer {
   <div class="quote-inner reveal">
     <p class="quote-text">Wat niet wordt uitgesproken, verdwijnt niet.<br>Het blijft voelbaar in hoe we samenwerken.</p>
     <div class="quote-line"></div>
+    <svg class="brush-accent" viewBox="0 0 48 16" xmlns="http://www.w3.org/2000/svg"><path d="M 2 12 C 8 6, 18 4, 28 5 C 38 6, 44 9, 46 8" fill="none" stroke="#C9A76A" stroke-width="3" stroke-linecap="round" opacity="0.5"/></svg>
   </div>
 </div>
 
@@ -742,6 +748,7 @@ footer {
         <p>Wat ik vaak zie, is dat teams daar een beetje in blijven hangen. Niet omdat mensen het niet willen oplossen. Maar omdat het lastig is om onder woorden te brengen wat er speelt.</p>
         <p>Die plek herken ik goed. Het gevoel om ergens tussen te zitten. Tussen wat je voelt en wat je laat zien. Je redt het wel. Maar het stroomt niet.</p>
         <p>Daar werk ik. Door ruimte te maken voor wat er al is — zodat mensen zich weer uitspreken en er weer beweging ontstaat.</p>
+        <p style="color:var(--celadon-dark);font-style:italic;margin-top:1.75rem;">Wat niet wordt uitgesproken, verdwijnt niet. Het blijft ergens tussen mensen hangen.</p>
       </div>
     </div>
     <div class="reveal reveal-d2">
@@ -782,7 +789,7 @@ footer {
       <div class="stap reveal">
         <div class="stap-nr">01</div>
         <h3>Zichtbaar maken wat er speelt</h3>
-        <p>We vertragen even. Kijken naar wat er gebeurt, zonder het meteen op te lossen.</p>
+        <p>We vertragen even. Niet om stil te blijven staan, maar om te zien wat er al speelt — en waar het eigenlijk over gaat.</p>
       </div>
       <div class="stap reveal reveal-d1">
         <div class="stap-nr">02</div>
@@ -812,7 +819,7 @@ footer {
       </div>
       <div class="herken-item">
         <div class="herken-dot"></div>
-        <p>Je merkt dat dingen blijven liggen of niet worden uitgesproken.</p>
+        <p>Je merkt dat dingen niet worden uitgesproken — en dat dat steeds meer invloed krijgt op hoe jullie samenwerken.</p>
       </div>
       <div class="herken-item">
         <div class="herken-dot"></div>
@@ -857,10 +864,11 @@ footer {
         Soms helpt het al om even samen te kijken naar wat er speelt.<br>
         Geen groot traject. Geen ingewikkeld plan. Gewoon een eerste gesprek.
       </p>
+      <p class="contact-sub" style="color:rgba(255,255,255,0.45);margin-top:-1rem;">Je hoeft het nog niet helemaal helder te hebben.<br>Dat is vaak precies waar we beginnen.</p>
       <div class="contact-gegevens">
-        <a href="mailto:hallo@woojung.nl" class="contact-item">
+        <a href="/cdn-cgi/l/email-protection#7018111c1c1f30071f1f1a051e175e1e1c" class="contact-item">
           <span class="contact-item-dot"></span>
-          hallo@woojung.nl
+          <span class="__cf_email__" data-cfemail="bdd5dcd1d1d2fdcad2d2d7c8d3da93d3d1">[email&#160;protected]</span>
         </a>
         <a href="https://linkedin.com/in/woojung" class="contact-item" target="_blank">
           <span class="contact-item-dot"></span>
@@ -871,7 +879,7 @@ footer {
     </div>
     <div class="reveal reveal-d1">
       <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" id="contact-form">
-        <input type="hidden" name="access_key" value="JOUW_WEB3FORMS_KEY_HIER">
+        <input type="hidden" name="access_key" value="cddc23df-4307-4603-b8f3-99783074efde">
         <input type="hidden" name="subject" value="Nieuw bericht via woojung.nl">
         <input type="hidden" name="redirect" value="false">
         <input type="checkbox" name="botcheck" style="display:none">
@@ -900,7 +908,7 @@ footer {
   <span class="footer-sub">Coaching en Training · woojung.nl</span>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function() {
   window.addEventListener('scroll', function() {
     document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
@@ -911,7 +919,10 @@ footer {
       if (e.isIntersecting) e.target.classList.add('visible');
     });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    el.classList.add('hidden');
+    io.observe(el);
+  });
 
   var form = document.getElementById('contact-form');
   if (form) {
@@ -930,17 +941,4 @@ footer {
         } else {
           document.getElementById('form-err').style.display = 'block';
           btn.textContent = 'Plan een kennismaking';
-          btn.disabled = false;
-        }
-      } catch(err) {
-        document.getElementById('form-err').style.display = 'block';
-        btn.textContent = 'Plan een kennismaking';
-        btn.disabled = false;
-      }
-    });
-  }
-})();
-</script>
-
-</body>
-</html>
+          btn.disabled = fals
