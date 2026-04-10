@@ -628,6 +628,29 @@ nav.scrolled {
 .form-msg.ok { color: var(--celadon-light); }
 .form-msg.err { color: #d4956a; }
 
+/* ASSET ACCENTS */
+.hero-accent {
+  position: absolute;
+  top: -20px;
+  right: -40px;
+  width: 260px;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+}
+.quote-divider {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.waarde-icon-img {
+  width: 36px;
+  height: auto;
+  margin-bottom: 0.5rem;
+  opacity: 0.85;
+}
+
 /* FOOTER */
 footer {
   background: var(--ink);
@@ -706,6 +729,7 @@ footer {
 <!-- HERO -->
 <section class="hero">
   <div class="hero-blob"></div>
+  <img src="assets/swoosh1.png" class="hero-accent" alt="">
   <div class="hero-blob2"></div>
   <div class="hero-inner">
     <p class="hero-pre">Coaching en Training</p>
@@ -731,7 +755,7 @@ footer {
 <div class="quote-band">
   <div class="quote-inner reveal">
     <p class="quote-text">Wat niet wordt uitgesproken, verdwijnt niet.<br>Het blijft voelbaar in hoe we samenwerken.</p>
-    <div class="quote-line"></div>
+    <div class="quote-divider"><img src="assets/goldball.png" style="width:10px;opacity:0.55;" alt=""></div>
     <svg class="brush-accent" viewBox="0 0 48 16" xmlns="http://www.w3.org/2000/svg"><path d="M 2 12 C 8 6, 18 4, 28 5 C 38 6, 44 9, 46 8" fill="none" stroke="#C9A76A" stroke-width="3" stroke-linecap="round" opacity="0.5"/></svg>
   </div>
 </div>
@@ -754,19 +778,19 @@ footer {
     <div class="reveal reveal-d2">
       <div class="waarden">
         <div class="waarde">
-          <p class="waarde-naam">Compassie</p>
+          <img src="assets/eyes.png" class="waarde-icon-img" alt=""><p class="waarde-naam">Compassie</p>
           <p>Zonder oordeel kijken naar wat er speelt, ook als het schuurt.</p>
         </div>
         <div class="waarde">
-          <p class="waarde-naam">Eerlijkheid</p>
+          <img src="assets/swoosh2.png" class="waarde-icon-img" alt=""><p class="waarde-naam">Eerlijkheid</p>
           <p>Zeggen wat gezegd moet worden, op een manier die te horen is.</p>
         </div>
         <div class="waarde">
-          <p class="waarde-naam">Verbinding</p>
+          <img src="assets/hearty.png" class="waarde-icon-img" alt=""><p class="waarde-naam">Verbinding</p>
           <p>Zorgen dat mensen elkaar weer zien en begrijpen.</p>
         </div>
         <div class="waarde">
-          <p class="waarde-naam">Richting</p>
+          <img src="assets/compass.png" class="waarde-icon-img" alt=""><p class="waarde-naam">Richting</p>
           <p>Niet blijven hangen, maar samen kiezen hoe verder.</p>
         </div>
       </div>
@@ -840,6 +864,7 @@ footer {
       <p class="section-label">Diensten</p>
       <h2>Wat ik aanbied</h2>
     </div>
+    <div style="margin-bottom:2rem;"><img src="assets/swoosh1.png" style="width:120px;opacity:0.12;" alt=""></div>
     <div class="diensten-grid">
       <div class="dienst reveal">
         <h3>Teamontwikkeling</h3>
@@ -904,7 +929,7 @@ footer {
 </section>
 
 <footer>
-  <span class="footer-name">Woo Jung</span>
+  <img src="assets/logo.png" style="height:36px;width:auto;opacity:0.7;" alt="Woo Jung">
   <span class="footer-sub">Coaching en Training · woojung.nl</span>
 </footer>
 
