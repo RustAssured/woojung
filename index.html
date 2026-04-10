@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Woo Jung · Coaching en Training</title>
+<link rel="icon" href="/assets/goldball.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
@@ -694,10 +695,57 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* HAMBURGER */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  z-index: 101;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--celadon-dark);
+  margin: 5px 0;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.hamburger.open span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
 /* RESPONSIVE */
 @media (max-width: 900px) {
   nav { padding: 1rem 1.5rem; }
-  .nav-links { display: none; }
+  .hamburger { display: block; }
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(247,244,239,0.98);
+    backdrop-filter: blur(12px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    z-index: 100;
+  }
+  .nav-links.open {
+    display: flex;
+  }
+  .nav-links a {
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: var(--ink-mid);
+  }
   .hero { padding: 7rem 1.5rem 4rem; }
   .quote-band { padding: 4rem 1.5rem; }
   .over { grid-template-columns: 1fr; padding: 5rem 1.5rem; gap: 4rem; }
@@ -718,18 +766,21 @@ footer {
 
 <nav id="nav">
   <a href="#" class="nav-name">Woo Jung</a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-links">
     <li><a href="#over">Over</a></li>
     <li><a href="#aanpak">Aanpak</a></li>
     <li><a href="#diensten">Diensten</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-blob"></div>
-  <img src="assets/swoosh1.png" class="hero-accent" alt="">
+  <img src="/assets/swoosh1.png" class="hero-accent" alt="">
   <div class="hero-blob2"></div>
   <div class="hero-inner">
     <p class="hero-pre">Coaching en Training</p>
@@ -755,7 +806,7 @@ footer {
 <div class="quote-band">
   <div class="quote-inner reveal">
     <p class="quote-text">Wat niet wordt uitgesproken, verdwijnt niet.<br>Het blijft voelbaar in hoe we samenwerken.</p>
-    <div class="quote-divider"><img src="assets/goldball.png" style="width:10px;opacity:0.55;" alt=""></div>
+    <div class="quote-divider"><img src="/assets/goldball.png" style="width:10px;opacity:0.55;" alt=""></div>
     <svg class="brush-accent" viewBox="0 0 48 16" xmlns="http://www.w3.org/2000/svg"><path d="M 2 12 C 8 6, 18 4, 28 5 C 38 6, 44 9, 46 8" fill="none" stroke="#C9A76A" stroke-width="3" stroke-linecap="round" opacity="0.5"/></svg>
   </div>
 </div>
@@ -778,19 +829,19 @@ footer {
     <div class="reveal reveal-d2">
       <div class="waarden">
         <div class="waarde">
-          <img src="assets/eyes.png" class="waarde-icon-img" alt=""><p class="waarde-naam">Compassie</p>
+          <img src="/assets/eyes.png" class="waarde-icon-img" alt=""><p class="waarde-naam">Compassie</p>
           <p>Zonder oordeel kijken naar wat er speelt, ook als het schuurt.</p>
         </div>
         <div class="waarde">
-          <img src="assets/swoosh2.png" class="waarde-icon-img" alt=""><p class="waarde-naam">Eerlijkheid</p>
+          <img src="/assets/swoosh2.png" class="waarde-icon-img" alt=""><p class="waarde-naam">Eerlijkheid</p>
           <p>Zeggen wat gezegd moet worden, op een manier die te horen is.</p>
         </div>
         <div class="waarde">
-          <img src="assets/hearty.png" class="waarde-icon-img" alt=""><p class="waarde-naam">Verbinding</p>
+          <img src="/assets/hearty.png" class="waarde-icon-img" alt=""><p class="waarde-naam">Verbinding</p>
           <p>Zorgen dat mensen elkaar weer zien en begrijpen.</p>
         </div>
         <div class="waarde">
-          <img src="assets/compass.png" class="waarde-icon-img" alt=""><p class="waarde-naam">Richting</p>
+          <img src="/assets/compass.png" class="waarde-icon-img" alt=""><p class="waarde-naam">Richting</p>
           <p>Niet blijven hangen, maar samen kiezen hoe verder.</p>
         </div>
       </div>
@@ -864,7 +915,7 @@ footer {
       <p class="section-label">Diensten</p>
       <h2>Wat ik aanbied</h2>
     </div>
-    <div style="margin-bottom:2rem;"><img src="assets/swoosh1.png" style="width:120px;opacity:0.12;" alt=""></div>
+    <div style="margin-bottom:2rem;"><img src="/assets/swoosh1.png" style="width:120px;opacity:0.12;" alt=""></div>
     <div class="diensten-grid">
       <div class="dienst reveal">
         <h3>Teamontwikkeling</h3>
@@ -929,7 +980,7 @@ footer {
 </section>
 
 <footer>
-  <img src="assets/logo.png" style="height:36px;width:auto;opacity:0.7;" alt="Woo Jung">
+  <img src="/assets/logo.png" style="height:36px;width:auto;opacity:0.7;" alt="Woo Jung">
   <span class="footer-sub">Coaching en Training · woojung.nl</span>
 </footer>
 
@@ -966,4 +1017,34 @@ footer {
         } else {
           document.getElementById('form-err').style.display = 'block';
           btn.textContent = 'Plan een kennismaking';
-          btn.disabled = fals
+          btn.disabled = false;
+        }
+      } catch (err) {
+        document.getElementById('form-err').style.display = 'block';
+        btn.textContent = 'Plan een kennismaking';
+        btn.disabled = false;
+      }
+    });
+  }
+
+  // Hamburger menu toggle
+  var hamburger = document.getElementById('hamburger');
+  var navLinks = document.getElementById('nav-links');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function() {
+      var isOpen = navLinks.classList.toggle('open');
+      hamburger.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+    navLinks.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        navLinks.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>
