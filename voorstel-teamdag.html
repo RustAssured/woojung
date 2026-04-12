@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Voorstel Teamdag &mdash; WooJung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a18;
+    --paper: #f7f4ef;
+    --paper-alt: #eef1ee;
+    --warm: #c8b89a;
+    --muted: #6b6560;
+    --accent: #3d5a4f;
+    --light-line: rgba(0,0,0,0.09);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--light-line);
+  }
+
+  .logo-mark {
+    width: 72px;
+    height: auto;
+    display: block;
+    margin: 0 auto 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 0.85rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.35s;
+  }
+
+  .brand span {
+    display: block;
+    font-style: italic;
+    letter-spacing: 0.15em;
+    font-size: 0.75rem;
+    margin-top: 0.2rem;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 5rem 2rem 4rem;
+    max-width: 720px;
+    margin: 0 auto;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.5s;
+  }
+
+  .label {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    color: var(--ink);
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-top: 1.5rem;
+    max-width: 480px;
+    line-height: 1.8;
+  }
+
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--warm);
+    margin: 0 auto;
+  }
+
+  /* SECTION BLOCKS — alternating backgrounds */
+  .block {
+    padding: 4rem 2rem;
+  }
+
+  .block:nth-child(odd) {
+    background: var(--paper);
+  }
+
+  .block:nth-child(even) {
+    background: var(--paper-alt);
+  }
+
+  .block-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  /* Section visibility */
+  .section {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .section.will-animate {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .section.will-animate.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Section header with icon */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    opacity: 0.82;
+    flex-shrink: 0;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--warm);
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 1.9rem;
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+    color: var(--ink);
+  }
+
+  h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: var(--accent);
+    margin: 2rem 0 0.75rem;
+  }
+
+  p {
+    font-size: 0.97rem;
+    color: #3a3832;
+    margin-bottom: 1rem;
+  }
+
+  /* BULLETS */
+  .items {
+    list-style: none;
+    margin: 1rem 0 0;
+  }
+
+  .items li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--light-line);
+    font-size: 0.95rem;
+    color: #3a3832;
+  }
+
+  .items li:last-child { border-bottom: none; }
+
+  .items li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--warm);
+    flex-shrink: 0;
+    margin-top: 0.6em;
+  }
+
+  /* TIMELINE */
+  .timeline { margin-top: 1.5rem; }
+
+  .time-slot {
+    display: grid;
+    grid-template-columns: 95px 1fr;
+    gap: 1.5rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--light-line);
+    align-items: start;
+  }
+
+  .time-slot:last-child { border-bottom: none; }
+
+  .time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #4a4540;
+    letter-spacing: 0.04em;
+    padding-top: 0.1rem;
+  }
+
+  .slot-title {
+    font-size: 0.95rem;
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  .slot-note {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 0.25rem;
+    font-style: italic;
+  }
+
+  .lunch .time,
+  .lunch .slot-title {
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* CLOSING BLOCK */
+  .closing-block {
+    background: var(--accent);
+    padding: 4rem 2rem;
+  }
+
+  .closing-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .closing-inner::before {
+    content: '\275D';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 8rem;
+    position: absolute;
+    top: -2rem;
+    left: -0.5rem;
+    opacity: 0.08;
+    line-height: 1;
+    pointer-events: none;
+    color: #fff;
+  }
+
+  .closing-inner p {
+    color: #d4ddd6;
+    font-size: 1.05rem;
+    line-height: 1.85;
+    position: relative;
+  }
+
+  .closing-inner p + p { margin-top: 1rem; }
+
+  /* CTA */
+  .cta-block {
+    background: var(--paper);
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    border-top: 1px solid var(--light-line);
+  }
+
+  .cta-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-link {
+    display: inline-block;
+    padding: 0.85rem 2.2rem;
+    background: var(--accent);
+    color: #e8ede9;
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: background 0.2s ease;
+  }
+
+  .cta-link:hover { background: #2e4439; }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    border-top: 1px solid var(--light-line);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 2.4rem; }
+    .time-slot { grid-template-columns: 72px 1fr; gap: 1rem; }
+    .block { padding: 3rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <img src="assets/logo.png" class="logo-mark" alt="WooJung logo">
+  <div class="brand">
+    WooJung
+    <span>Coaching en Training</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="label">Voorstel &middot; Teamontwikkeling</div>
+  <h1>Verbinding<br>en <em>Samenwerking</em></h1>
+  <p class="hero-sub">Een dag om als team echt stil te staan &mdash; bij wat goed gaat, wat schuurt, en waar jullie samen naartoe willen.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- BLOCK 1 — paper -->
+<div class="block">
+  <div class="block-inner section">
+    <div class="section-header">
+      <img src="assets/hearty.png" class="section-icon" alt="">
+      <div class="section-label">Doel van de dag</div>
+    </div>
+    <h2>Een sterke gezamenlijke basis</h2>
+    <p>De Teamdag is gericht op het neerzetten van een stevige basis voor de komende periode. De insteek is bewust mensgericht en laagdrempelig &mdash; zodat er optimaal ruimte is voor de eerlijke gesprekken, zonder dat het zwaar of geforceerd aanvoelt.</p>
+    <ul class="items">
+      <li>Elkaar beter begrijpen als team</li>
+      <li>Zichtbaar maken wat er speelt in de samenwerking</li>
+      <li>Samen concrete afspraken maken</li>
+      <li>Richting bepalen voor het komende jaar</li>
+    </ul>
+  </div>
+</div>
+
+<!-- BLOCK 2 — alt -->
+<div class="block">
+  <div class="block-inner section">
+    <div class="section-header">
+      <img src="assets/compass.png" class="section-icon" alt="">
+      <div class="section-label">Opbouw van de dag</div>
+    </div>
+    <h2>Twee delen die op elkaar voortbouwen</h2>
+
+    <h3>Ochtend &mdash; Verbinding en inzicht</h3>
+    <p>We starten met het versterken van de onderlinge verbinding en het creëren van een psychologisch veilige omgeving. Het doel is niet om direct oplossingen te vinden, maar om gezamenlijk zicht te krijgen op wat er speelt. Dit zorgt voor herkenning en een gedeelde basis.</p>
+    <ul class="items">
+      <li>Hoe teamleden in het team staan</li>
+      <li>Wat goed werkt in de samenwerking</li>
+      <li>Waar het in de praktijk soms stroef loopt</li>
+    </ul>
+
+    <h3>Middag &mdash; Begrip, keuzes en afspraken</h3>
+    <p>In de middag verdiepen we de belangrijkste thema's die in de ochtend naar voren zijn gekomen. Vanuit begrip maken we de vertaalslag naar afspraken &mdash; gezamenlijk, zodat ze ook echt gedragen worden.</p>
+    <ul class="items">
+      <li>Wat er onder deze situaties zit</li>
+      <li>Wat mensen daarin nodig hebben</li>
+      <li>Wat helpt om beter samen te werken</li>
+      <li>Concrete samenwerkingsafspraken</li>
+      <li>Doelen en richting voor het komende jaar</li>
+    </ul>
+  </div>
+</div>
+
+<!-- BLOCK 3 — paper -->
+<div class="block">
+  <div class="block-inner section">
+    <div class="section-header">
+      <img src="assets/puzzle.png" class="section-icon" alt="">
+      <div class="section-label">Werkwijze</div>
+    </div>
+    <h2>Interactief en afwisselend</h2>
+    <p>Iedereen krijgt de ruimte om bij te dragen op een manier die bij hem of haar past.</p>
+    <ul class="items">
+      <li>Korte reflectiemomenten</li>
+      <li>Gesprekken in duo&rsquo;s en kleine groepen</li>
+      <li>Gezamenlijke plenaire momenten</li>
+    </ul>
+    <p style="margin-top:1.25rem;">De focus ligt op veiligheid en openheid, praktische toepasbaarheid, en het stap voor stap opbouwen van vertrouwen.</p>
+  </div>
+</div>
+
+<!-- BLOCK 4 — alt -->
+<div class="block">
+  <div class="block-inner section">
+    <div class="section-header">
+      <img src="assets/eyes.png" class="section-icon" alt="">
+      <div class="section-label">Programma</div>
+    </div>
+    <h2>Globale dagindeling</h2>
+    <div class="timeline">
+      <div class="time-slot">
+        <div class="time">09:15&ndash;10:00</div>
+        <div>
+          <div class="slot-title">Start en kennismaking</div>
+          <div class="slot-note">Met aandacht voor hoe iedereen in het team zit</div>
+        </div>
+      </div>
+      <div class="time-slot">
+        <div class="time">10:00&ndash;11:00</div>
+        <div>
+          <div class="slot-title">Verbinding en inzicht</div>
+          <div class="slot-note">Wat goed werkt in de samenwerking</div>
+        </div>
+      </div>
+      <div class="time-slot">
+        <div class="time">11:00&ndash;12:00</div>
+        <div>
+          <div class="slot-title">Wat schuurt in de praktijk</div>
+          <div class="slot-note">Ruimte voor de eerlijke, onuitgesproken onderstroom</div>
+        </div>
+      </div>
+      <div class="time-slot lunch">
+        <div class="time">12:00&ndash;13:00</div>
+        <div>
+          <div class="slot-title">Lunch</div>
+        </div>
+      </div>
+      <div class="time-slot">
+        <div class="time">13:00&ndash;14:00</div>
+        <div>
+          <div class="slot-title">Verdieping</div>
+          <div class="slot-note">De belangrijkste thema&rsquo;s uit de ochtend</div>
+        </div>
+      </div>
+      <div class="time-slot">
+        <div class="time">14:00&ndash;14:15</div>
+        <div>
+          <div class="slot-title">Korte pauze</div>
+        </div>
+      </div>
+      <div class="time-slot">
+        <div class="time">14:15&ndash;15:00</div>
+        <div>
+          <div class="slot-title">Samenwerkingsafspraken</div>
+          <div class="slot-note">Concrete vertaalslag naar de praktijk</div>
+        </div>
+      </div>
+      <div class="time-slot">
+        <div class="time">15:00&ndash;15:45</div>
+        <div>
+          <div class="slot-title">Doelen en richting</div>
+          <div class="slot-note">Gezamenlijk vooruitkijken naar het komende jaar</div>
+        </div>
+      </div>
+      <div class="time-slot">
+        <div class="time">15:45&ndash;16:30</div>
+        <div>
+          <div class="slot-title">Afronding en reflectie</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BLOCK 5 — paper -->
+<div class="block">
+  <div class="block-inner section">
+    <div class="section-header">
+      <img src="assets/hearty.png" class="section-icon" alt="">
+      <div class="section-label">Wat levert het op</div>
+    </div>
+    <h2>Na deze dag</h2>
+    <ul class="items">
+      <li>Teamleden hebben elkaar beter leren begrijpen</li>
+      <li>Meer duidelijkheid over wat er (onderhuids) speelt</li>
+      <li>Concrete afspraken waar het team mee verder kan</li>
+      <li>Een gedeeld beeld van de richting voor het komende jaar</li>
+    </ul>
+  </div>
+</div>
+
+<!-- CLOSING — dark green -->
+<div class="closing-block">
+  <div class="closing-inner section">
+    <p>De dag is gevormd rondom de punten die je hebt benoemd: inzicht in het team en de teamdynamiek, ruimte voor de veelal onuitgesproken onderstroom, afspraken maken over samenwerking en samen vooruitkijken.</p>
+    <p>Ik begeleid het gesprek, stel de juiste vragen en geef jou en het team de gelegenheid om dat wat besproken wordt ook te vertalen naar concrete en werkbare stappen.</p>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-block">
+  <p class="cta-text">Vragen of wil je dit bespreken?</p>
+  <a class="cta-link" href="mailto:info@woojung.nl">Neem contact op</a>
+</div>
+
+<footer>
+  &copy; WooJung &middot; Coaching en Training &middot; woojung.nl
+</footer>
+
+<script>
+  if ('IntersectionObserver' in window) {
+    var sections = document.querySelectorAll('.section');
+    sections.forEach(function(s) { s.classList.add('will-animate'); });
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.06 });
+
+    sections.forEach(function(s, i) {
+      s.style.transitionDelay = (i * 0.05) + 's';
+      observer.observe(s);
+    });
+  }
+</script>
+
+</body>
+</html>
