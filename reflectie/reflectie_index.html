@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Na die dag — Woo Jung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="stijl.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="screen active" id="screen-intro">
+    <div class="brand">Woo Jung · Coaching en Training</div>
+    <p class="intro-pre">Na die dag</p>
+    <h1 class="intro-title">Vragen om<br><em>bij stil te staan.</em></h1>
+    <div class="intro-divider"></div>
+    <div class="intro-body">
+      <p>Wat er uitgesproken wordt in een dag als die van jullie, verdwijnt niet. Maar het heeft tijd en ruimte nodig om te landen.</p>
+      <p>Deze vragen zijn er niet om te beoordelen. Ze zijn er om bij stil te staan, op je eigen moment, op je eigen manier.</p>
+      <p>Geen goede of foute antwoorden. Geen verplichte terugkoppeling. Gewoon een spiegel.</p>
+    </div>
+    <button class="btn btn-primary" onclick="start()">Begin met de vragen</button>
+  </div>
+
+  <!-- VRAAG -->
+  <div class="screen" id="screen-question">
+    <div class="brand">Woo Jung · Coaching en Training</div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+    <div class="question-meta">
+      <span class="question-cat" id="q-cat"></span>
+      <span class="question-dot"></span>
+      <span class="question-nr" id="q-nr"></span>
+    </div>
+    <div class="question-card">
+      <p class="question-text" id="q-text"></p>
+    </div>
+    <p class="question-hint" id="q-hint"></p>
+    <div class="nav-row">
+      <button class="btn btn-ghost" id="btn-prev" onclick="vorige()">Vorige</button>
+      <button class="btn btn-primary" id="btn-next" onclick="volgende()">Volgende</button>
+    </div>
+  </div>
+
+  <!-- AFSLUITING -->
+  <div class="screen" id="screen-close">
+    <div class="brand">Woo Jung · Coaching en Training</div>
+    <div class="close-mark">"</div>
+    <h2 class="close-title">Dank je wel.</h2>
+    <p class="close-body">
+      Als er iets is blijven hangen, een gedachte die je wil delen of iets wat je liever samen bespreekt, dan mag dat altijd.
+    </p>
+    <p class="close-signature">
+      Wat niet wordt uitgesproken, verdwijnt niet.<br>
+      Het blijft ergens tussen mensen hangen.
+    </p>
+    <div class="close-contact">
+      <a href="mailto:info@woojung.nl">info@woojung.nl</a> &nbsp;·&nbsp;
+      <a href="https://woojung.nl">woojung.nl</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">woojung.nl</div>
+
+<script src="vragen.js"></script>
+
+</body>
+</html>
