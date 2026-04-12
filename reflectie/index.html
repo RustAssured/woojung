@@ -6,13 +6,341 @@
 <title>Na die dag — Woo Jung</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="stijl.css">
+<style>
+/* ================================================
+   Woo Jung · Reflectievragen
+   stijl.css
+   ================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --celadon: #6F8F88;
+  --celadon-dark: #2D6B62;
+  --celadon-light: #A8C5BC;
+  --gold: #C9A76A;
+  --cream: #F7F4EF;
+  --ink: #1C1917;
+  --ink-mid: #4A4540;
+  --ink-soft: #8A8178;
+  --white: #FDFBF8;
+}
+
+html, body {
+  min-height: 100vh;
+  background: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  color: var(--ink);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem 1.25rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* achtergrond blobs */
+body::before {
+  content: '';
+  position: fixed;
+  top: -15%;
+  right: -10%;
+  width: 55vw;
+  height: 70vh;
+  background: var(--celadon-light);
+  opacity: 0.08;
+  border-radius: 42% 58% 52% 48% / 46% 38% 62% 54%;
+  animation: morph 22s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -10%;
+  left: -8%;
+  width: 40vw;
+  height: 50vh;
+  background: var(--gold);
+  opacity: 0.05;
+  border-radius: 58% 42% 44% 56% / 56% 44% 56% 44%;
+  animation: morph2 28s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes morph {
+  0%, 100% { border-radius: 42% 58% 52% 48% / 46% 38% 62% 54%; }
+  50%       { border-radius: 56% 44% 36% 64% / 58% 52% 48% 42%; }
+}
+@keyframes morph2 {
+  0%, 100% { border-radius: 58% 42% 44% 56% / 56% 44% 56% 44%; }
+  50%       { border-radius: 42% 58% 58% 42% / 44% 56% 44% 56%; }
+}
+
+/* container */
+.container {
+  width: 100%;
+  max-width: 560px;
+  position: relative;
+  z-index: 1;
+}
+
+/* schermen */
+.screen {
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  animation: fadeIn 0.6s ease forwards;
+}
+.screen.active { display: flex; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* branding */
+.brand {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--gold);
+}
+
+/* intro */
+.intro-pre {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--celadon);
+  margin-bottom: 1.25rem;
+}
+.intro-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(30px, 6vw, 46px);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 1.75rem;
+}
+.intro-title em {
+  font-style: italic;
+  color: var(--celadon-dark);
+}
+.intro-divider {
+  width: 32px;
+  height: 1.5px;
+  background: var(--gold);
+  margin-bottom: 1.75rem;
+  opacity: 0.6;
+}
+.intro-body {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--ink-mid);
+  margin-bottom: 2.5rem;
+  max-width: 460px;
+}
+.intro-body p { margin-bottom: 1rem; }
+.intro-body p:last-child { margin-bottom: 0; }
+
+/* voortgang */
+.progress-bar {
+  width: 100%;
+  height: 2px;
+  background: rgba(168, 197, 188, 0.2);
+  border-radius: 2px;
+  margin-bottom: 2.5rem;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--celadon-light);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* vraag meta */
+.question-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.question-cat {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.question-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--celadon-light);
+  opacity: 0.6;
+}
+.question-nr {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--ink-soft);
+}
+
+/* vraagkaart */
+.question-card {
+  background: var(--white);
+  border-radius: 16px;
+  border: 0.5px solid rgba(168, 197, 188, 0.25);
+  padding: 2.5rem 2.25rem;
+  margin-bottom: 1.5rem;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.question-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 4.5vw, 27px);
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+/* hint */
+.question-hint {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin-bottom: 2rem;
+  padding-left: 1rem;
+  border-left: 2px solid rgba(201, 167, 106, 0.3);
+}
+
+/* knoppen */
+.nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+.btn {
+  padding: 13px 28px;
+  border-radius: 40px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.15s, background 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary {
+  background: var(--celadon-dark);
+  color: var(--white);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--celadon-dark);
+  border: 1px solid rgba(45, 107, 98, 0.35);
+}
+.btn-ghost:hover { background: rgba(45, 107, 98, 0.05); }
+.btn-gold {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+/* afsluiting */
+.close-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 64px;
+  font-weight: 300;
+  color: var(--gold);
+  opacity: 0.3;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+.close-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(26px, 5vw, 38px);
+  font-weight: 300;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+.close-body {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--ink-mid);
+  margin-bottom: 1rem;
+}
+.close-signature {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--celadon-dark);
+  line-height: 1.6;
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+}
+.close-contact {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 0.5px solid rgba(168, 197, 188, 0.25);
+}
+.close-contact a {
+  color: var(--celadon-dark);
+  text-decoration: none;
+}
+
+/* footer */
+.footer {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  opacity: 0.4;
+  z-index: 1;
+}
+
+@media (max-width: 600px) {
+  .question-card { padding: 2rem 1.5rem; }
+  .btn { padding: 12px 22px; }
+}
+
+</style>
 </head>
 <body>
 
 <div class="container">
 
-  <!-- INTRO -->
   <div class="screen active" id="screen-intro">
     <div class="brand">Woo Jung · Coaching en Training</div>
     <p class="intro-pre">Na die dag</p>
@@ -26,7 +354,6 @@
     <button class="btn btn-primary" onclick="start()">Begin met de vragen</button>
   </div>
 
-  <!-- VRAAG -->
   <div class="screen" id="screen-question">
     <div class="brand">Woo Jung · Coaching en Training</div>
     <div class="progress-bar">
@@ -47,7 +374,6 @@
     </div>
   </div>
 
-  <!-- AFSLUITING -->
   <div class="screen" id="screen-close">
     <div class="brand">Woo Jung · Coaching en Training</div>
     <div class="close-mark">"</div>
@@ -69,7 +395,180 @@
 
 <div class="footer">woojung.nl</div>
 
-<script src="vragen.js"></script>
+<script>
+/* ================================================
+   VRAGEN — pas dit aan per klant
+   Voeg maatwerklagen toe onderaan bij MAATWERK
+   ================================================ */
+
+/* ================================================
+   Woo Jung · Reflectievragen
+   vragen.js
+
+   Pas hier de vragen aan per klant.
+   Voeg maatwerklagen toe onderaan.
+   ================================================ */
+
+var vragen = [
+
+  /* LAAG 1 — IK */
+  {
+    cat: "Ik",
+    tekst: "Wat nam je mee uit die dag? Niet wat je dacht te moeten meenemen, maar wat er echt bleef.",
+    hint: ""
+  },
+  {
+    cat: "Ik",
+    tekst: "Er was een moment die dag waarop je iets voelde maar het niet zei. Wat was dat?",
+    hint: ""
+  },
+  {
+    cat: "Ik",
+    tekst: "Wat doe jij dat samenwerken soms moeilijker maakt, ook al bedoel je het goed?",
+    hint: "Een eerlijke vraag. Neem je tijd."
+  },
+  {
+    cat: "Ik",
+    tekst: "Wanneer trek jij je terug in het team, en waarom?",
+    hint: ""
+  },
+  {
+    cat: "Ik",
+    tekst: "Wat heb je nodig van je collega's dat je nog niet durft te vragen?",
+    hint: ""
+  },
+
+  /* LAAG 2 — WIJ */
+  {
+    cat: "Wij",
+    tekst: "Wat is er die dag gezegd wat er al lang had moeten zijn?",
+    hint: ""
+  },
+  {
+    cat: "Wij",
+    tekst: "Wat wordt er in jullie team nog steeds niet uitgesproken, ook na die dag?",
+    hint: ""
+  },
+  {
+    cat: "Wij",
+    tekst: "Wie in het team zie jij anders dan voor die dag? Wat is er voor jou verschoven?",
+    hint: ""
+  },
+  {
+    cat: "Wij",
+    tekst: "Wat heeft het team nodig dat het zichzelf nog niet geeft?",
+    hint: "Niet wat anderen moeten doen. Wat het team als geheel."
+  },
+
+  /* LAAG 3 — RICHTING */
+  {
+    cat: "Richting",
+    tekst: "Welke afspraak die jullie maakten staat er nog steeds, en welke niet meer?",
+    hint: ""
+  },
+  {
+    cat: "Richting",
+    tekst: "Wat is er veranderd in hoe je naar de samenwerking kijkt?",
+    hint: ""
+  },
+  {
+    cat: "Richting",
+    tekst: "Wat is de eerste kleine stap die jij kunt zetten, deze week nog?",
+    hint: "Klein is goed. Klein is reëel."
+  }
+
+  /* ── MAATWERKLAAG ────────────────────────────────────────
+     Voeg hier vragen toe na de dag.
+     Gebruik de woorden van het team zelf.
+
+     Voorbeeld:
+     ,{
+       cat: "Maatwerk",
+       tekst: "Jullie spraken over voortrekkerij. Hoe heb je dat de afgelopen week ervaren?",
+       hint: ""
+     }
+     ──────────────────────────────────────────────────────── */
+
+];
+
+
+/* ================================================
+   Hieronder hoef je niets aan te passen.
+   ================================================ */
+
+var huidig = 0;
+
+function toonScherm(id) {
+  document.querySelectorAll('.screen').forEach(function(s) {
+    s.classList.remove('active');
+  });
+  var el = document.getElementById(id);
+  el.classList.add('active');
+  el.style.animation = 'none';
+  el.offsetHeight; // reflow
+  el.style.animation = '';
+}
+
+function renderVraag() {
+  var q = vragen[huidig];
+  var totaal = vragen.length;
+
+  document.getElementById('q-cat').textContent = q.cat;
+  document.getElementById('q-nr').textContent = (huidig + 1) + ' van ' + totaal;
+  document.getElementById('q-text').textContent = q.tekst;
+
+  var hintEl = document.getElementById('q-hint');
+  if (q.hint && q.hint.length > 0) {
+    hintEl.textContent = q.hint;
+    hintEl.style.display = 'block';
+  } else {
+    hintEl.style.display = 'none';
+  }
+
+  document.getElementById('progress-fill').style.width =
+    ((huidig + 1) / totaal * 100) + '%';
+
+  var prevBtn = document.getElementById('btn-prev');
+  var nextBtn = document.getElementById('btn-next');
+
+  prevBtn.style.visibility = huidig === 0 ? 'hidden' : 'visible';
+
+  if (huidig === totaal - 1) {
+    nextBtn.textContent = 'Afronden';
+    nextBtn.className = 'btn btn-gold';
+  } else {
+    nextBtn.textContent = 'Volgende';
+    nextBtn.className = 'btn btn-primary';
+  }
+}
+
+function start() {
+  huidig = 0;
+  renderVraag();
+  toonScherm('screen-question');
+  window.scrollTo(0, 0);
+}
+
+function volgende() {
+  if (huidig < vragen.length - 1) {
+    huidig++;
+    renderVraag();
+    window.scrollTo(0, 0);
+  } else {
+    toonScherm('screen-close');
+    window.scrollTo(0, 0);
+  }
+}
+
+function vorige() {
+  if (huidig > 0) {
+    huidig--;
+    renderVraag();
+    window.scrollTo(0, 0);
+  }
+}
+
+</script>
 
 </body>
 </html>
