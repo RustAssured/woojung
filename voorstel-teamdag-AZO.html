@@ -33,10 +33,25 @@
 
   /* HEADER */
   header {
+    position: relative;
     padding: 3rem 2rem 2rem;
     text-align: center;
     border-bottom: 1px solid var(--light-line);
   }
+
+  .back-link {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--ink); }
 
   .logo-mark {
     width: 72px;
@@ -352,6 +367,7 @@
 <body>
 
 <header>
+  <a href="https://woojung.nl" class="back-link">&larr; woojung.nl</a>
   <img src="assets/logo.png" class="logo-mark" alt="WooJung logo">
   <div class="brand">
     WooJung
