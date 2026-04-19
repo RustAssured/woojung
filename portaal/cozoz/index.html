@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Klantportaal &middot; WooJung</title>
+<link rel="icon" href="/assets/goldball.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="stijl.css">
+</head>
+<body>
+
+<!-- PIN-SCHERM -->
+<section class="pin-wrap" id="pin-screen">
+  <div class="pin-card" id="pin-card">
+    <div class="brand-mark">WooJung</div>
+    <div class="brand-mark-sub">Coaching en Training</div>
+
+    <h1 class="pin-title">Welkom in <em>het portaal</em></h1>
+    <p class="pin-sub">Voer je viercijferige toegangscode in om verder te gaan.</p>
+
+    <div class="pin-inputs" id="pin-inputs">
+      <input type="tel" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Cijfer 1">
+      <input type="tel" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Cijfer 2">
+      <input type="tel" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Cijfer 3">
+      <input type="tel" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Cijfer 4">
+    </div>
+
+    <div class="pin-error" id="pin-error">Deze code klopt niet. Probeer opnieuw.</div>
+
+    <div class="pin-hint-divider"></div>
+    <p class="pin-hint">Geen code ontvangen? Mail naar info@woojung.nl</p>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section class="dash-wrap hidden" id="dashboard">
+  <div class="dash-inner">
+
+    <div class="dash-head">
+      <div class="dash-label">Klantportaal &middot; Gemeente Amsterdam ZuidOost</div>
+      <h2 class="dash-title">Welkom, <em>Awa</em></h2>
+      <p class="dash-sub">Hier vind je alles rondom de teamdag op 16 maart. Neem rustig de tijd om door te lezen, alles staat er voor jullie klaar.</p>
+      <div class="dash-divider"></div>
+    </div>
+
+    <div class="tiles">
+      <a class="tile" href="welkom.html">
+        <div class="tile-nr">I</div>
+        <div class="tile-title">Welkom</div>
+        <p class="tile-desc">Een korte introductie en wat je in dit portaal vindt.</p>
+        <span class="tile-cta">Lees <span aria-hidden="true">&rarr;</span></span>
+      </a>
+
+      <a class="tile" href="voorstel.html">
+        <div class="tile-nr">II</div>
+        <div class="tile-title">Voorstel</div>
+        <p class="tile-desc">De inhoudelijke basis van de teamdag: doel, opbouw en werkwijze.</p>
+        <span class="tile-cta">Lees <span aria-hidden="true">&rarr;</span></span>
+      </a>
+
+      <a class="tile" href="programma.html">
+        <div class="tile-nr">III</div>
+        <div class="tile-title">Programma</div>
+        <p class="tile-desc">Het programma voor 16 maart, zoals we dat samen hebben vormgegeven.</p>
+        <span class="tile-cta">Lees <span aria-hidden="true">&rarr;</span></span>
+      </a>
+
+      <a class="tile" href="offerte.html">
+        <div class="tile-nr">IV</div>
+        <div class="tile-title">Offerte</div>
+        <p class="tile-desc">De zakelijke bevestiging, inclusief downloadbare PDF.</p>
+        <span class="tile-cta">Bekijk <span aria-hidden="true">&rarr;</span></span>
+      </a>
+    </div>
+
+    <div class="dash-foot">
+      Woo Jung <span class="sep">&middot;</span> Coaching en Training
+      <span class="sep">&middot;</span>
+      <a href="#" id="logout">Afsluiten</a>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function() {
+  var PIN = '2026';
+  var pinScreen = document.getElementById('pin-screen');
+  var dashboard = document.getElementById('dashboard');
+  var card = document.getElementById('pin-card');
+  var errorEl = document.getElementById('pin-error');
+  var inputs = Array.prototype.slice.call(
+    document.querySelectorAll('#pin-inputs input')
+  );
+
+  function showDashboard() {
+    pinScreen.classList.add('hidden');
+    dashboard.classList.remove('hidden');
+  }
+
+  function showPin() {
+    dashboard.classList.add('hidden');
+    pinScreen.classList.remove('hidden');
+    clearInputs();
+    setTimeout(function() { inputs[0].focus(); }, 100);
+  }
+
+  function clearInputs() {
+    inputs.forEach(function(i) { i.value = ''; });
+  }
+
+  function showError() {
+    errorEl.classList.add('visible');
+    card.classList.add('shake');
+    setTimeout(function() { card.classList.remove('shake'); }, 500);
+  }
+
+  function hideError() {
+    errorEl.classList.remove('visible');
+  }
+
+  function validate() {
+    var code = inputs.map(function(i) { return i.value; }).join('');
+    if (code.length < 4) return;
+    if (code === PIN) {
+      sessionStorage.setItem('cozoz_auth', 'ok');
+      showDashboard();
+    } else {
+      showError();
+      clearInputs();
+      inputs[0].focus();
+    }
+  }
+
+  inputs.forEach(function(input, idx) {
+    input.addEventListener('input', function(e) {
+      var val = input.value.replace(/[^0-9]/g, '');
+      input.value = val.slice(0, 1);
+      hideError();
+
+      if (input.value && idx < inputs.length - 1) {
+        inputs[idx + 1].focus();
+      }
+
+      if (inputs.every(function(i) { return i.value; })) {
+        validate();
+      }
+    });
+
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Backspace' && !input.value && idx > 0) {
+        inputs[idx - 1].focus();
+        inputs[idx - 1].value = '';
+        hideError();
+      } else if (e.key === 'ArrowLeft' && idx > 0) {
+        inputs[idx - 1].focus();
+      } else if (e.key === 'ArrowRight' && idx < inputs.length - 1) {
+        inputs[idx + 1].focus();
+      }
+    });
+
+    input.addEventListener('paste', function(e) {
+      e.preventDefault();
+      var pasted = (e.clipboardData || window.clipboardData).getData('text');
+      var digits = pasted.replace(/[^0-9]/g, '').slice(0, 4);
+      for (var i = 0; i < digits.length && i < inputs.length; i++) {
+        inputs[i].value = digits[i];
+      }
+      if (digits.length === 4) validate();
+      else if (digits.length > 0 && digits.length < 4) inputs[digits.length].focus();
+    });
+  });
+
+  var logout = document.getElementById('logout');
+  if (logout) {
+    logout.addEventListener('click', function(e) {
+      e.preventDefault();
+      sessionStorage.removeItem('cozoz_auth');
+      showPin();
+    });
+  }
+
+  if (sessionStorage.getItem('cozoz_auth') === 'ok') {
+    showDashboard();
+  } else {
+    setTimeout(function() { inputs[0].focus(); }, 200);
+  }
+})();
+</script>
+
+</body>
+</html>
