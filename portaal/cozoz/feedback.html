@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Feedback &middot; WooJung</title>
+<link rel="icon" href="../../assets/goldball.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --ink: #1a1a18;
+  --paper: #f7f4ef;
+  --warm: #c8b89a;
+  --gold: #c9a76a;
+  --muted: #6b6560;
+  --accent: #3d5a4f;
+  --celadon: #a8bdb2;
+  --celadon-lt: #dce8e4;
+  --line: rgba(0,0,0,0.09);
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  color: var(--ink);
+  background: var(--paper);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(80px);
+}
+body::before {
+  top: -120px;
+  right: -100px;
+  background: var(--celadon);
+  animation: drift1 18s ease-in-out infinite alternate;
+}
+body::after {
+  bottom: -80px;
+  left: -100px;
+  background: var(--warm);
+  animation: drift2 22s ease-in-out infinite alternate;
+}
+@keyframes drift1 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-40px, 30px) scale(1.08); }
+}
+@keyframes drift2 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, -25px) scale(1.05); }
+}
+
+/* TOP-NAV */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  background: rgba(247, 244, 239, 0.55);
+  backdrop-filter: blur(6px);
+  position: relative;
+  z-index: 1;
+}
+.topbar-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.topbar-label {
+  text-transform: uppercase;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+}
+
+/* HEADER */
+.header {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 4rem 2rem 0;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.header-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--warm);
+  margin-bottom: 1.5rem;
+}
+.header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(2.2rem, 4.5vw, 3rem);
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+.header h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.header .lead {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.divider {
+  width: 40px;
+  height: 1px;
+  background: var(--warm);
+  margin: 2.5rem auto 0;
+}
+
+/* FORM CONTAINER */
+.form-wrap {
+  max-width: 620px;
+  margin: 3rem auto 0;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.vraag {
+  margin-bottom: 2.5rem;
+}
+.vraag-label {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 0.6rem;
+  line-height: 1.4;
+}
+.vraag-opt {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--warm);
+  margin-bottom: 0.3rem;
+}
+
+/* SLIDER */
+.slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+.slider-wrap input[type="range"] {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: var(--celadon-lt);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+.slider-wrap input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.slider-wrap input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.slider-wrap input[type="range"]:active::-webkit-slider-thumb,
+.slider-wrap input[type="range"]:focus::-webkit-slider-thumb {
+  transform: scale(1.15);
+}
+.slider-wrap input[type="range"]:active::-moz-range-thumb,
+.slider-wrap input[type="range"]:focus::-moz-range-thumb {
+  transform: scale(1.15);
+}
+.slider-wrap input[type="range"]::-moz-range-track {
+  height: 4px;
+  background: var(--celadon-lt);
+  border-radius: 2px;
+  border: none;
+}
+.slider-badge {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--celadon-lt);
+  color: var(--accent);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.4rem;
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+/* TEXTAREA */
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.6);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--ink);
+  padding: 1rem;
+  border-radius: 0;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.25s ease;
+  -webkit-font-smoothing: antialiased;
+}
+textarea:focus {
+  border-color: var(--accent);
+}
+textarea::placeholder {
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+/* SUBMIT */
+.submit-btn {
+  display: inline-block;
+  padding: 0.85rem 2.5rem;
+  background: var(--accent);
+  color: #e8ede9;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin-top: 0.5rem;
+}
+.submit-btn:hover {
+  background: #2e4439;
+  transform: translateY(-1px);
+}
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ERROR */
+.form-error {
+  color: #a05a4a;
+  font-size: 0.85rem;
+  margin-top: 1rem;
+  display: none;
+}
+.form-error.visible {
+  display: block;
+}
+
+/* SUCCESS STATE */
+.success {
+  display: none;
+  text-align: center;
+  padding: 3rem 0 2rem;
+}
+.success.visible {
+  display: block;
+}
+.success h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+}
+.success p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 460px;
+  margin: 0 auto;
+}
+.success .gold-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  margin: 2rem auto 0;
+}
+
+/* SLOTKAART */
+.slot-card {
+  background: var(--accent);
+  border-radius: 14px;
+  padding: 4rem 2rem;
+  max-width: 620px;
+  margin: 3.5rem auto 0;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.slot-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.65;
+  color: #d4ddd6;
+  max-width: 440px;
+  margin: 0 auto 1.75rem;
+}
+.slot-brand {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #7aada0;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 3rem 2rem 2.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  margin-top: 4rem;
+  position: relative;
+  z-index: 1;
+}
+.footer a {
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+  padding-bottom: 1px;
+  transition: color 0.25s ease;
+  letter-spacing: 0.14em;
+}
+.footer a:hover { color: var(--ink); }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .topbar { padding: 1rem 1.25rem; flex-wrap: wrap; gap: 0.35rem; }
+  .topbar-brand { font-size: 0.7rem; letter-spacing: 0.16em; }
+  .topbar-label { font-size: 0.6rem; letter-spacing: 0.14em; }
+  .header { padding: 2.5rem 1.5rem 0; }
+  .header h1 { font-size: 2rem; }
+  .header .lead { font-size: 0.9rem; }
+  .form-wrap { padding: 0 1.25rem; }
+  .vraag-label { font-size: 1.05rem; }
+  textarea { font-size: 0.9rem; padding: 0.85rem; }
+  .submit-btn { width: 100%; padding: 1rem 2rem; }
+  .slot-card { padding: 2.5rem 1.5rem; margin: 2.5rem 1rem 0; border-radius: 12px; }
+  .slot-quote { font-size: 1.1rem; }
+  .footer { padding: 2rem 1.25rem; margin-top: 2.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar-brand">Woo Jung &middot; Coaching en Training</span>
+  <span class="topbar-label">Feedback &middot; COZOZ 4</span>
+</div>
+
+<section class="header">
+  <div class="header-label">Feedback &middot; Teamdag COZOZ 4</div>
+  <h1>Hoe heb je de dag <em>ervaren</em>?</h1>
+  <p class="lead">We zijn benieuwd hoe je de teamdag hebt ervaren. Het invullen duurt 2 tot 3 minuten en is volledig anoniem. Je input helpt om te leren en om eventuele vervolgstappen goed aan te laten sluiten.</p>
+  <div class="divider"></div>
+</section>
+
+<div class="form-wrap">
+
+  <form id="feedback-form" method="POST" action="https://api.web3forms.com/submit">
+    <input type="hidden" name="access_key" value="cddc23df-4307-4603-b8f3-99783074efde">
+    <input type="hidden" name="subject" value="Feedback Teamdag COZOZ 4">
+    <input type="hidden" name="from_name" value="Feedback COZOZ">
+    <input type="checkbox" name="botcheck" style="display:none">
+
+    <div class="vraag">
+      <label class="vraag-label" for="waardevol">Hoe waardevol was de teamdag voor jou persoonlijk?</label>
+      <div class="slider-wrap">
+        <input type="range" id="waardevol" name="waardevol" min="1" max="10" value="7" required>
+        <span class="slider-badge" id="waardevol-val">7</span>
+      </div>
+      <div class="slider-labels">
+        <span>1 &middot; niet waardevol</span>
+        <span>10 &middot; zeer waardevol</span>
+      </div>
+    </div>
+
+    <div class="vraag">
+      <label class="vraag-label" for="bespreekbaar">In hoeverre heeft de dag geholpen om dingen bespreekbaar te maken?</label>
+      <div class="slider-wrap">
+        <input type="range" id="bespreekbaar" name="bespreekbaar" min="1" max="10" value="7" required>
+        <span class="slider-badge" id="bespreekbaar-val">7</span>
+      </div>
+      <div class="slider-labels">
+        <span>1 &middot; helemaal niet</span>
+        <span>10 &middot; zeer sterk</span>
+      </div>
+    </div>
+
+    <div class="vraag">
+      <label class="vraag-label" for="waardevol_moment">Wat was voor jou het meest waardevolle moment van de dag?</label>
+      <textarea id="waardevol_moment" name="waardevol_moment" rows="3" placeholder="Beschrijf kort..." required></textarea>
+    </div>
+
+    <div class="vraag">
+      <label class="vraag-label" for="gemist">Is er iets dat je hebt gemist of anders had gewild?</label>
+      <textarea id="gemist" name="gemist" rows="3" placeholder="Optioneel"></textarea>
+    </div>
+
+    <div class="vraag">
+      <label class="vraag-label" for="meenemen">Wat neem jij concreet mee naar je werk?</label>
+      <textarea id="meenemen" name="meenemen" rows="3" placeholder="Beschrijf kort..." required></textarea>
+    </div>
+
+    <div class="vraag">
+      <span class="vraag-opt">Optioneel</span>
+      <label class="vraag-label" for="vrij_uitspreken">Voelde je je vrij om je uit te spreken tijdens de dag?</label>
+      <textarea id="vrij_uitspreken" name="vrij_uitspreken" rows="3" placeholder="Waarom wel of niet?"></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn" id="submit-btn">Verstuur feedback</button>
+    <div class="form-error" id="form-error">Er ging iets mis. Probeer het opnieuw.</div>
+  </form>
+
+  <div class="success" id="success">
+    <h2>Dank je wel.</h2>
+    <p>Je feedback is anoniem ontvangen. Dit helpt om de volgende stap goed aan te laten sluiten bij wat het team nodig heeft.</p>
+    <div class="gold-dot"></div>
+  </div>
+
+</div>
+
+<div class="slot-card">
+  <p class="slot-quote">Wat niet wordt uitgesproken, verdwijnt niet.<br>Het blijft ergens tussen mensen hangen.</p>
+  <div class="slot-brand">Woo Jung &middot; Coaching en Training</div>
+</div>
+
+<footer class="footer">
+  <a href="https://woojung.nl">woojung.nl</a>
+</footer>
+
+<script>
+document.getElementById('waardevol').addEventListener('input', function() {
+  document.getElementById('waardevol-val').textContent = this.value;
+});
+document.getElementById('bespreekbaar').addEventListener('input', function() {
+  document.getElementById('bespreekbaar-val').textContent = this.value;
+});
+
+document.getElementById('feedback-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var form = this;
+  var btn = document.getElementById('submit-btn');
+  var err = document.getElementById('form-error');
+
+  btn.disabled = true;
+  btn.textContent = 'Versturen...';
+  err.classList.remove('visible');
+
+  var data = new FormData(form);
+
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    body: data
+  })
+  .then(function(res) { return res.json(); })
+  .then(function(json) {
+    if (json.success) {
+      form.style.display = 'none';
+      document.getElementById('success').classList.add('visible');
+    } else {
+      err.classList.add('visible');
+      btn.disabled = false;
+      btn.textContent = 'Verstuur feedback';
+    }
+  })
+  .catch(function() {
+    err.classList.add('visible');
+    btn.disabled = false;
+    btn.textContent = 'Verstuur feedback';
+  });
+});
+</script>
+
+</body>
+</html>
