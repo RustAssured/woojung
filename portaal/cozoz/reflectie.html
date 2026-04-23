@@ -4,12 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<script>
-  if (sessionStorage.getItem('cozoz_auth') !== 'ok') {
-    window.location.href = 'index.html';
-  }
-</script>
-<title>Reflectiekaarten &middot; Klantportaal WooJung</title>
+<title>Reflectiekaarten &middot; WooJung</title>
 <link rel="icon" href="../../assets/goldball.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,6 +14,58 @@
   /* ============================================================
      REFLECTIE.HTML — specifieke styling
      ============================================================ */
+
+  /* TOPBAR (vervangt portaal-nav, geen links) */
+  .refl-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--light-line);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    background: rgba(247, 244, 239, 0.55);
+    backdrop-filter: blur(6px);
+    position: relative;
+    z-index: 1;
+  }
+  .refl-topbar-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    color: var(--muted);
+  }
+  .refl-topbar-label {
+    text-transform: uppercase;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+  }
+
+  /* FOOTER (vervangt portal-footer + back-button) */
+  .refl-footer {
+    text-align: center;
+    padding: 3rem 2rem 2.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    border-top: 1px solid var(--light-line);
+    margin-top: 4rem;
+    position: relative;
+    z-index: 1;
+  }
+  .refl-footer-link {
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+    padding-bottom: 1px;
+    transition: color 0.25s ease;
+    letter-spacing: 0.14em;
+  }
+  .refl-footer-link:hover { color: var(--ink); }
 
   /* HEADER */
   .refl-header {
@@ -431,6 +478,10 @@
 
   /* RESPONSIVE */
   @media (max-width: 720px) {
+    .refl-topbar { padding: 1rem 1.25rem; flex-wrap: wrap; gap: 0.35rem; }
+    .refl-topbar-brand { font-size: 0.65rem; letter-spacing: 0.18em; }
+    .refl-topbar-label { font-size: 0.6rem; letter-spacing: 0.16em; }
+    .refl-footer { padding: 2rem 1.25rem; margin-top: 2.5rem; }
     .refl-header { padding: 2.5rem 1.5rem 0; }
     .refl-header .lead { font-size: 1rem; }
     .golf-intro { margin-top: 2.5rem; font-size: 0.65rem; letter-spacing: 0.22em; }
@@ -452,10 +503,10 @@
 </head>
 <body>
 
-<nav class="portal-nav">
-  <a href="index.html" class="back-link">&larr; Terug naar portaal</a>
-  <span class="klant-label">Klantportaal &middot; Gemeente Amsterdam ZuidOost</span>
-</nav>
+<div class="refl-topbar">
+  <span class="refl-topbar-brand">Woo Jung &middot; Coaching en Training</span>
+  <span class="refl-topbar-label">Reflectiekaarten &middot; COZOZ 4</span>
+</div>
 
 <!-- HEADER -->
 <section class="refl-header">
@@ -525,15 +576,9 @@
   <div class="slot-brand">Woo Jung &middot; Coaching en Training</div>
 </div>
 
-<div class="refl-bottom">
-  <div class="back-to-portal-wrap">
-    <a href="index.html" class="btn-ghost">&larr; Terug naar portaal</a>
-  </div>
-
-  <footer class="portal-footer">
-    Woo Jung <span class="sep">&middot;</span> Coaching en Training
-  </footer>
-</div>
+<footer class="refl-footer">
+  <a href="https://woojung.nl" class="refl-footer-link">woojung.nl</a>
+</footer>
 
 <script>
 const VRAGEN = []; // vullen we in stap 2
