@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<script>
+  if (sessionStorage.getItem('cozoz_auth') !== 'ok') {
+    window.location.href = 'index.html';
+  }
+</script>
+<title>Reflectiekaarten &middot; Klantportaal WooJung</title>
+<link rel="icon" href="../../assets/goldball.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="stijl.css">
+<style>
+  .refl-intro {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 4rem 2rem 0;
+    position: relative;
+    z-index: 1;
+  }
+  .refl-intro .label { color: var(--warm); }
+  .refl-intro .lead { max-width: 580px; }
+
+  .golf {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 4.5rem 2rem 2rem;
+    position: relative;
+    z-index: 1;
+  }
+  .golf-header {
+    margin-bottom: 3rem;
+  }
+  .golf-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 2.2rem;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+  .golf-sub {
+    font-size: 0.88rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+  }
+
+  .laag-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--warm);
+    margin: 2.5rem 0 1.25rem;
+  }
+  .laag-label:first-child { margin-top: 0; }
+
+  .vraag-card {
+    background: rgba(253, 251, 248, 0.8);
+    border: 0.5px solid rgba(168, 197, 188, 0.25);
+    border-radius: 12px;
+    padding: 2rem 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .vraag-card.will-animate {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  .vraag-card.will-animate.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .vraag-nr {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 1rem;
+    color: var(--gold);
+    flex-shrink: 0;
+    min-width: 1.6rem;
+    padding-top: 0.2rem;
+  }
+  .vraag-tekst {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.35rem;
+    line-height: 1.55;
+    color: var(--accent);
+  }
+
+  .golf-sep {
+    width: 40px;
+    height: 1px;
+    background: var(--warm);
+    margin: 0 auto;
+    opacity: 0.6;
+  }
+
+  .slot-card {
+    background: var(--accent);
+    border-radius: 12px;
+    padding: 3rem 2.5rem;
+    max-width: 680px;
+    margin: 3rem auto 0;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .slot-card .signature {
+    color: #d4ddd6;
+    margin: 0 auto 1.5rem;
+    font-size: 1.3rem;
+  }
+  .slot-card .slot-brand {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    color: rgba(212, 221, 214, 0.5);
+  }
+
+  .refl-bottom {
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 720px) {
+    .refl-intro { padding: 2.5rem 1.5rem 0; }
+    .golf { padding: 3rem 1.5rem 1.5rem; }
+    .vraag-card { padding: 1.5rem; gap: 1rem; }
+    .vraag-tekst { font-size: 1.15rem; }
+    .golf-title { font-size: 1.85rem; }
+    .slot-card { padding: 2.5rem 1.5rem; margin: 2rem 1rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="portal-nav">
+  <a href="index.html" class="back-link">&larr; Terug naar portaal</a>
+  <span class="klant-label">Klantportaal &middot; Gemeente Amsterdam ZuidOost</span>
+</nav>
+
+<div class="refl-intro section">
+  <div class="label">Reflectiekaarten &middot; COZOZ 4</div>
+  <h1>Vragen om <em>bij stil te staan</em></h1>
+  <p class="lead">Deze vragen zijn er niet om te beoordelen. Ze zijn er om bij stil te staan, op je eigen moment, op je eigen manier. Gebruik ze individueel, of pak er af en toe &eacute;&eacute;n op in een teamoverleg.</p>
+  <div class="divider"></div>
+</div>
+
+
+<!-- ============================================================
+     GOLF 1
+     ============================================================ -->
+<div class="golf section">
+  <div class="golf-header">
+    <h2 class="golf-title">Golf 1</h2>
+    <p class="golf-sub">Binnen drie dagen &middot; De dag is nog vers</p>
+  </div>
+
+  <div class="laag-label">Ik</div>
+
+  <div class="vraag-card">
+    <span class="vraag-nr">1</span>
+    <p class="vraag-tekst">Wat heeft je vandaag het meest geraakt, en waarom juist dat?</p>
+  </div>
+  <div class="vraag-card">
+    <span class="vraag-nr">2</span>
+    <p class="vraag-tekst">Was er iets dat je wilde zeggen maar niet hebt gezegd? Wat hield je tegen?</p>
+  </div>
+  <div class="vraag-card">
+    <span class="vraag-nr">3</span>
+    <p class="vraag-tekst">Wat heb je vandaag over jezelf geleerd dat je wil onthouden?</p>
+  </div>
+
+  <div class="laag-label">Wij</div>
+
+  <div class="vraag-card">
+    <span class="vraag-nr">4</span>
+    <p class="vraag-tekst">Wat heb je gehoord van een collega dat je nog niet wist of had verwacht?</p>
+  </div>
+  <div class="vraag-card">
+    <span class="vraag-nr">5</span>
+    <p class="vraag-tekst">Er is vandaag iets uitgesproken wat al een tijdje tussen mensen hing. Hoe voelt het dat dat er nu is?</p>
+  </div>
+  <div class="vraag-card">
+    <span class="vraag-nr">6</span>
+    <p class="vraag-tekst">Welke afspraak die jullie hebben gemaakt voelt het meest concreet voor jou? Wat ga jij daar zelf in doen?</p>
+  </div>
+
+  <div class="laag-label">Richting</div>
+
+  <div class="vraag-card">
+    <span class="vraag-nr">7</span>
+    <p class="vraag-tekst">Als je terugdenkt aan de pijn die besproken is, onrust, verdeeldheid, het gevoel niet gezien te worden, wat is er nodig om dat niet terug te laten komen?</p>
+  </div>
+  <div class="vraag-card">
+    <span class="vraag-nr">8</span>
+    <p class="vraag-tekst">Wat wil je morgen anders doen dan gisteren?</p>
+  </div>
+</div>
+
+<div class="golf-sep"></div>
+
+
+<!-- ============================================================
+     GOLF 2
+     ============================================================ -->
+<div class="golf section">
+  <div class="golf-header">
+    <h2 class="golf-title">Golf 2</h2>
+    <p class="golf-sub">Na twee tot drie weken &middot; De praktijk heeft zich laten zien</p>
+  </div>
+
+  <div class="laag-label">Ik</div>
+
+  <div class="vraag-card">
+    <span class="vraag-nr">9</span>
+    <p class="vraag-tekst">Heb je de afgelopen weken iets gedaan met wat je op de teamdag hebt uitgesproken? Zo ja: wat? Zo nee: wat hield je tegen?</p>
+  </div>
+  <div class="vraag-card">
+    <span class="vraag-nr">10</span>
+    <p class="vraag-tekst">Was er een moment waarop je over iemand praatte in plaats van met diegene? Wat deed je ermee?</p>
+  </div>
+  <div class="vraag-card">
+    <span class="vraag-nr">11</span>
+    <p class="vraag-tekst">Heb je iemand een compliment gegeven of waardering uitgesproken die je eerder voor je hield? Hoe voelde dat?</p>
+  </div>
+
+  <div class="laag-label">Wij</div>
+
+  <div class="vraag-card">
+    <span class="vraag-nr">12</span>
+    <p class="vraag-tekst">Zijn er dingen die jullie hebben afgesproken maar waar het in de praktijk toch lastig bleek? Wat maakte het lastig?</p>
+  </div>
+  <div class="vraag-card">
+    <span class="vraag-nr">13</span>
+    <p class="vraag-tekst">Spreek je collega&rsquo;s meer aan op wat er speelt, of merk je dat je er toch omheen loopt? Wanneer deed je dat de afgelopen tijd?</p>
+  </div>
+  <div class="vraag-card">
+    <span class="vraag-nr">14</span>
+    <p class="vraag-tekst">Is er iemand in het team die jij meer vertrouwen hebt gegeven dan voor de teamdag? Wat heeft dat gedaan?</p>
+  </div>
+
+  <div class="laag-label">Richting</div>
+
+  <div class="vraag-card">
+    <span class="vraag-nr">15</span>
+    <p class="vraag-tekst">Het verleden in het verleden laten, hoe gaat dat in de praktijk? Wanneer lukt het, wanneer lukt het niet?</p>
+  </div>
+  <div class="vraag-card">
+    <span class="vraag-nr">16</span>
+    <p class="vraag-tekst">Wat heeft het team de afgelopen weken goed gedaan? Heb je dat ook gezegd?</p>
+  </div>
+</div>
+
+<div class="golf-sep"></div>
+
+
+<!-- ============================================================
+     GOLF 3
+     ============================================================ -->
+<div class="golf section">
+  <div class="golf-header">
+    <h2 class="golf-title">Golf 3</h2>
+    <p class="golf-sub">Na zes tot acht weken &middot; Nu weet je of er echt iets is veranderd</p>
+  </div>
+
+  <div class="laag-label">Ik</div>
+
+  <div class="vraag-card">
+    <span class="vraag-nr">17</span>
+    <p class="vraag-tekst">Gedraag jij je anders in dit team dan twee maanden geleden? Wat is er concreet anders?</p>
+  </div>
+  <div class="vraag-card">
+    <span class="vraag-nr">18</span>
+    <p class="vraag-tekst">Is er iets wat je op de teamdag hebt beloofd, aan jezelf of aan een ander, waar je je niet aan hebt gehouden? Wat wil je daarmee doen?</p>
+  </div>
+  <div class="vraag-card">
+    <span class="vraag-nr">19</span>
+    <p class="vraag-tekst">Wat heb jij bijgedragen aan een veiligere sfeer in het team? Wat wil je nog meer doen?</p>
+  </div>
+
+  <div class="laag-label">Wij</div>
+
+  <div class="vraag-card">
+    <span class="vraag-nr">20</span>
+    <p class="vraag-tekst">Met elkaar praten in plaats van over elkaar, lukt dat? Wanneer gaat het goed, en wanneer glijdt het toch weer terug?</p>
+  </div>
+  <div class="vraag-card">
+    <span class="vraag-nr">21</span>
+    <p class="vraag-tekst">Voelen mensen zich gezien en gewaardeerd in dit team? Hoe weet je dat?</p>
+  </div>
+  <div class="vraag-card">
+    <span class="vraag-nr">22</span>
+    <p class="vraag-tekst">Is de verdeeldheid die er was verminderd? Wat heeft daaraan bijgedragen?</p>
+  </div>
+
+  <div class="laag-label">Richting</div>
+
+  <div class="vraag-card">
+    <span class="vraag-nr">23</span>
+    <p class="vraag-tekst">Waar is dit team over zes maanden trots op als het nu de goede stappen zet?</p>
+  </div>
+  <div class="vraag-card">
+    <span class="vraag-nr">24</span>
+    <p class="vraag-tekst">Wat heeft dit team nog nodig om echt als &eacute;&eacute;n team te werken? Wie of wat kan daarin helpen?</p>
+  </div>
+  <div class="vraag-card">
+    <span class="vraag-nr">25</span>
+    <p class="vraag-tekst">Als je &eacute;&eacute;n ding zou willen veranderen aan hoe jullie nu samenwerken, wat zou dat zijn? En wat doe jij daar zelf aan?</p>
+  </div>
+</div>
+
+
+<!-- SLOTKAART -->
+<div class="slot-card">
+  <p class="signature">Wat niet wordt uitgesproken, verdwijnt niet.<br>Het blijft ergens tussen mensen hangen.</p>
+  <div class="slot-brand">Woo Jung &middot; Coaching en Training</div>
+</div>
+
+
+<div class="refl-bottom">
+  <div class="back-to-portal-wrap">
+    <a href="index.html" class="btn-ghost">&larr; Terug naar portaal</a>
+  </div>
+
+  <footer class="portal-footer">
+    Woo Jung <span class="sep">&middot;</span> Coaching en Training
+  </footer>
+</div>
+
+<script>
+  if ('IntersectionObserver' in window) {
+    var els = document.querySelectorAll('.section, .vraag-card');
+    els.forEach(function(el) { el.classList.add('will-animate'); });
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.06 });
+
+    els.forEach(function(el, i) {
+      el.style.transitionDelay = (i * 0.03) + 's';
+      observer.observe(el);
+    });
+  }
+</script>
+
+</body>
+</html>
