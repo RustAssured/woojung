@@ -4,611 +4,652 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Reflectiekaarten &middot; WooJung</title>
-<link rel="icon" href="../../assets/goldball.png" type="image/png">
+<title>Reflectiekaarten &middot; COZOZ 4</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="stijl.css">
 <style>
-  /* ============================================================
-     REFLECTIE.HTML — specifieke styling
-     ============================================================ */
+:root {
+  --ink: #1a1a18;
+  --paper: #f7f4ef;
+  --warm: #c8b89a;
+  --gold: #c9a76a;
+  --muted: #6b6560;
+  --accent: #3d5a4f;
+  --celadon: #a8bdb2;
+  --celadon-lt: #dce8e4;
+  --line: rgba(0,0,0,0.09);
+}
 
-  /* TOPBAR (vervangt portaal-nav, geen links) */
-  .refl-topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.5rem 2rem;
-    border-bottom: 1px solid var(--light-line);
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    color: var(--muted);
-    background: rgba(247, 244, 239, 0.55);
-    backdrop-filter: blur(6px);
-    position: relative;
-    z-index: 1;
-  }
-  .refl-topbar-brand {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    font-size: 0.7rem;
-    color: var(--muted);
-  }
-  .refl-topbar-label {
-    text-transform: uppercase;
-    font-size: 0.65rem;
-    letter-spacing: 0.22em;
-    color: var(--muted);
-  }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
-  /* FOOTER (vervangt portal-footer + back-button) */
-  .refl-footer {
-    text-align: center;
-    padding: 3rem 2rem 2.5rem;
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
-    color: var(--muted);
-    border-top: 1px solid var(--light-line);
-    margin-top: 4rem;
-    position: relative;
-    z-index: 1;
-  }
-  .refl-footer-link {
-    color: var(--muted);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(0,0,0,0.12);
-    padding-bottom: 1px;
-    transition: color 0.25s ease;
-    letter-spacing: 0.14em;
-  }
-  .refl-footer-link:hover { color: var(--ink); }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
 
-  /* HEADER */
-  .refl-header {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 4rem 2rem 0;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-  }
-  .refl-header .label {
-    color: var(--warm);
-    display: flex;
-    justify-content: center;
-  }
-  .refl-header h1 {
-    margin: 0 auto 1.5rem;
-  }
-  .refl-header .lead {
-    max-width: 560px;
-    margin: 0 auto;
-    font-style: italic;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-size: 1.1rem;
-    color: var(--muted);
-    line-height: 1.75;
-  }
-  .refl-header .divider {
-    margin: 2.5rem auto 0;
-  }
+/* ── BLOBS ─────────────────────────────── */
+.blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+.blob-1 { width: 440px; height: 440px; background: var(--celadon); top: -140px; right: -120px; }
+.blob-2 { width: 340px; height: 340px; background: var(--warm); bottom: -100px; left: -100px; }
 
-  /* GOLF-INTRODUCTIE (alleen zichtbaar in kaartmodus) */
-  .golf-intro {
-    max-width: 720px;
-    margin: 3.5rem auto 1.25rem;
-    text-align: center;
-    font-size: 0.72rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--warm);
-    padding: 0 2rem;
-    position: relative;
-    z-index: 1;
-    transition: opacity 0.25s ease;
-  }
-  .golf-intro .sep {
-    margin: 0 0.65rem;
-    opacity: 0.55;
-  }
+.page { position: relative; z-index: 1; }
 
-  /* TOGGLE */
-  .toggle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2.5rem;
-    margin: 1.5rem auto 2.5rem;
-    padding: 0 2rem;
-    position: relative;
-    z-index: 1;
-  }
-  .toggle button {
-    background: none;
-    border: none;
-    padding: 0.35rem 0.1rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 400;
-    letter-spacing: 0.04em;
-    color: var(--muted);
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    transition: color 0.25s ease, border-color 0.25s ease;
-  }
-  .toggle button:hover { color: var(--accent); }
-  .toggle button.active {
-    color: var(--accent);
-    border-bottom-color: var(--gold);
-  }
+/* ── TOP NAV ───────────────────────────── */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
 
-  /* KAARTMODUS */
-  .card-mode {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 2rem 2rem;
-    position: relative;
-    z-index: 1;
-  }
-  .card-mode.hidden { display: none; }
+/* ── HEADER ────────────────────────────── */
+.header {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 4rem 2rem 2rem;
+  text-align: center;
+}
+.header-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--warm);
+  margin-bottom: 1.5rem;
+}
+.header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 1.2rem;
+}
+.header h1 em { font-style: italic; color: var(--accent); }
+.header .lead {
+  font-size: 0.95rem;
+  color: var(--muted);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+.divider {
+  width: 40px;
+  height: 1px;
+  background: var(--warm);
+  margin: 2rem auto;
+}
 
-  .refl-card {
-    background: rgba(253, 251, 248, 0.75);
-    border: 0.5px solid rgba(168, 197, 188, 0.25);
-    border-radius: 14px;
-    min-height: 340px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    position: relative;
-    transition: opacity 0.25s ease;
-  }
-  .refl-card.fading { opacity: 0; }
-  .refl-card.hidden { display: none; }
+/* ── CONTROLS ──────────────────────────── */
+.controls {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 2rem 2rem;
+  text-align: center;
+}
+.golf-label {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+}
+.golf-label strong {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  color: var(--ink);
+  font-size: 1rem;
+}
+.toggle {
+  display: inline-flex;
+  gap: 1.8rem;
+}
+.toggle button {
+  background: none;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0.3rem 0;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+.toggle button.active {
+  color: var(--accent);
+  border-bottom-color: var(--gold);
+}
+.toggle button:hover { color: var(--accent); }
 
-  .refl-card-progress {
-    width: 100%;
-    height: 3px;
-    background: rgba(168, 189, 178, 0.18);
-    overflow: hidden;
-  }
-  .refl-card-progress-fill {
-    height: 100%;
-    background: var(--celadon);
-    width: 0%;
-    transition: width 0.4s ease;
-  }
+/* ── CARD MODE ─────────────────────────── */
+.card-view {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 2rem 3rem;
+}
+.card-view.hidden { display: none; }
 
-  .refl-card-body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 2rem 2.5rem 2.5rem;
-    position: relative;
-  }
+.progress-bar {
+  height: 3px;
+  background: var(--line);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--celadon);
+  border-radius: 2px;
+  transition: width 0.35s ease;
+}
 
-  .refl-card-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 2.5rem;
-    gap: 1rem;
-  }
-  .refl-card-tag {
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--warm);
-  }
-  .refl-card-count {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: 0.95rem;
-    color: var(--gold);
-    letter-spacing: 0.05em;
-  }
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.card-laag {
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--warm);
+}
+.card-count {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
 
-  .refl-card-nr {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: 1rem;
-    color: var(--gold);
-    text-align: center;
-    margin-bottom: 1.25rem;
-    letter-spacing: 0.04em;
-  }
+.card-content {
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1rem;
+}
+.card-content.fade-in {
+  animation: cardFade 0.35s ease forwards;
+}
+@keyframes cardFade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-  .refl-card-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: clamp(1.35rem, 2.6vw, 1.75rem);
-    line-height: 1.55;
-    color: var(--accent);
-    text-align: center;
-    max-width: 640px;
-    margin: 0 auto;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 0 2rem;
-  }
+.card-nr {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.card-tekst {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.6rem;
+  color: var(--accent);
+  max-width: 580px;
+  line-height: 1.55;
+}
 
-  .refl-card-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--light-line);
-  }
-  .refl-card-nav button {
-    background: none;
-    border: none;
-    padding: 0.4rem 0.1rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    cursor: pointer;
-    transition: color 0.25s ease, gap 0.25s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .refl-card-nav button:hover { color: var(--accent); }
-  .refl-card-nav button.invisible {
-    visibility: hidden;
-    pointer-events: none;
-  }
-  .refl-card-nav .nav-sep {
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--warm);
-    opacity: 0.6;
-    flex-shrink: 0;
-  }
+.card-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  min-height: 2.5rem;
+}
+.nav-btn {
+  background: none;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0.5rem 0;
+  transition: color 0.2s ease;
+}
+.nav-btn:hover { color: var(--accent); }
+.nav-btn.golf-next { color: var(--gold); }
+.nav-btn.golf-next:hover { color: var(--accent); }
+.nav-end {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-style: italic;
+}
+.nav-spacer { width: 1px; }
 
-  /* INTERSTITIAL (tussen golven) */
-  .interstitial {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 3rem 2.5rem;
-    text-align: center;
-    background: rgba(253, 251, 248, 0.75);
-    border: 0.5px solid rgba(168, 197, 188, 0.25);
-    border-radius: 14px;
-    min-height: 340px;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-  }
-  .interstitial.active { display: flex; }
-  .interstitial-tag {
-    font-size: 0.68rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--warm);
-    margin-bottom: 0.5rem;
-  }
-  .interstitial-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
-    font-size: 2.1rem;
-    line-height: 1.2;
-    color: var(--ink);
-    margin-bottom: 0.5rem;
-  }
-  .interstitial-title em {
-    font-style: italic;
-    color: var(--accent);
-  }
-  .interstitial-sub {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 300;
-    font-size: 1.1rem;
-    color: var(--muted);
-    max-width: 460px;
-    line-height: 1.7;
-    margin-bottom: 2rem;
-  }
-  .interstitial-btn {
-    display: inline-block;
-    padding: 0.85rem 2.2rem;
-    background: var(--accent);
-    color: #e8ede9;
-    text-decoration: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.78rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-  }
-  .interstitial-btn:hover {
-    background: #2e4439;
-    transform: translateY(-1px);
-  }
+/* ── LIST MODE ─────────────────────────── */
+.list-view {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 2rem 3rem;
+}
+.list-view.hidden { display: none; }
 
-  /* LIJSTMODUS */
-  .list-mode {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 2rem 2rem;
-    position: relative;
-    z-index: 1;
-  }
-  .list-mode.hidden { display: none; }
+.list-golf {
+  padding: 2.5rem 0;
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.list-golf.will-animate { opacity: 0; transform: translateY(16px); }
+.list-golf.will-animate.visible { opacity: 1; transform: none; }
 
-  .list-golf {
-    margin-bottom: 3rem;
-    opacity: 1;
-    transform: none;
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .list-golf.will-animate {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  .list-golf.will-animate.visible {
-    opacity: 1;
-    transform: none;
-  }
+.list-golf + .list-golf {
+  border-top: 1px solid var(--line);
+}
 
-  .list-golf-header {
-    text-align: center;
-    margin-bottom: 2.5rem;
-  }
-  .list-golf-tag {
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--warm);
-    margin-bottom: 0.8rem;
-  }
-  .list-golf-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
-    font-size: 2rem;
-    line-height: 1.2;
-    color: var(--ink);
-    margin-bottom: 0.4rem;
-  }
-  .list-golf-sub {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 300;
-    font-size: 1rem;
-    color: var(--muted);
-    line-height: 1.6;
-  }
+.list-golf-header { margin-bottom: 1.8rem; }
+.list-golf-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 2rem;
+  color: var(--ink);
+}
+.list-golf-sub {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-top: 0.3rem;
+}
 
-  .list-laag {
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--warm);
-    margin: 2rem 0 1rem;
-    padding-left: 0.25rem;
-  }
-  .list-vraag {
-    background: rgba(255, 255, 255, 0.5);
-    border: 0.5px solid rgba(168, 197, 188, 0.2);
-    border-radius: 10px;
-    padding: 1.5rem 1.75rem;
-    margin-bottom: 0.85rem;
-    display: flex;
-    align-items: flex-start;
-    gap: 1.1rem;
-  }
-  .list-vraag-nr {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: 1rem;
-    color: var(--gold);
-    flex-shrink: 0;
-    min-width: 1.5rem;
-    padding-top: 0.1rem;
-  }
-  .list-vraag-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: 1.2rem;
-    line-height: 1.55;
-    color: var(--accent);
-  }
+.list-laag {
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--warm);
+  margin: 2rem 0 0.8rem;
+}
 
-  .list-divider {
-    width: 40px;
-    height: 1px;
-    background: var(--warm);
-    margin: 2.5rem auto 3rem;
-    opacity: 0.65;
-  }
+.list-card {
+  background: rgba(255,255,255,0.5);
+  border: 1px solid var(--line);
+  padding: 1.5rem;
+  margin-bottom: 0.7rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.list-nr {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--gold);
+  flex-shrink: 0;
+  min-width: 1.5rem;
+  padding-top: 0.1rem;
+}
+.list-tekst {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--accent);
+  line-height: 1.6;
+}
 
-  /* SLOTKAART */
-  .slot-card {
-    background: var(--accent);
-    border-radius: 14px;
-    padding: 3.5rem 2.5rem;
-    max-width: 720px;
-    margin: 3rem auto 0;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-  }
-  .slot-quote {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: 1.35rem;
-    line-height: 1.6;
-    color: #e8ede9;
-    max-width: 520px;
-    margin: 0 auto 1.75rem;
-  }
-  .slot-brand {
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(232, 237, 233, 0.55);
-  }
+/* ── SLOTKAART ─────────────────────────── */
+.slotkaart {
+  background: var(--accent);
+  padding: 4rem 2rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+.slotkaart p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #d4ddd6;
+  line-height: 1.8;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.slotkaart .brand {
+  font-size: 0.72rem;
+  color: #7aada0;
+  letter-spacing: 0.15em;
+  margin-top: 2rem;
+}
 
-  /* BOTTOM */
-  .refl-bottom {
-    position: relative;
-    z-index: 1;
-  }
+/* ── FOOTER ────────────────────────────── */
+.site-footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+}
+.site-footer a {
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(107,101,96,0.3);
+}
+.site-footer a:hover { color: var(--accent); }
 
-  /* RESPONSIVE */
-  @media (max-width: 720px) {
-    .refl-topbar { padding: 1rem 1.25rem; flex-wrap: wrap; gap: 0.35rem; }
-    .refl-topbar-brand { font-size: 0.65rem; letter-spacing: 0.18em; }
-    .refl-topbar-label { font-size: 0.6rem; letter-spacing: 0.16em; }
-    .refl-footer { padding: 2rem 1.25rem; margin-top: 2.5rem; }
-    .refl-header { padding: 2.5rem 1.5rem 0; }
-    .refl-header .lead { font-size: 1rem; }
-    .golf-intro { margin-top: 2.5rem; font-size: 0.65rem; letter-spacing: 0.22em; }
-    .toggle { gap: 1.75rem; margin: 1.25rem auto 2rem; }
-    .card-mode, .list-mode { padding: 0 1rem 1.5rem; }
-    .refl-card-body { padding: 1.5rem 1.5rem 2rem; }
-    .refl-card { min-height: 320px; border-radius: 12px; }
-    .refl-card-meta { margin-bottom: 1.75rem; }
-    .refl-card-text { font-size: 1.25rem; padding: 0.5rem 0 1.25rem; }
-    .interstitial { padding: 2.5rem 1.5rem; min-height: 280px; border-radius: 12px; }
-    .interstitial-title { font-size: 1.75rem; }
-    .list-vraag { padding: 1.25rem 1.25rem; }
-    .list-vraag-text { font-size: 1.08rem; }
-    .list-golf-title { font-size: 1.7rem; }
-    .slot-card { padding: 2.5rem 1.5rem; margin: 2rem 1rem 0; border-radius: 12px; }
-    .slot-quote { font-size: 1.15rem; }
-  }
+/* ── RESPONSIVE ────────────────────────── */
+@media (max-width: 600px) {
+  .header { padding: 3rem 1.5rem 1.5rem; }
+  .card-view, .list-view, .controls { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .card-tekst { font-size: 1.3rem; }
+  .list-tekst { font-size: 1.05rem; }
+  .card-content { min-height: 220px; padding: 2rem 0.5rem; }
+  .top-nav { padding: 1rem 1.5rem; font-size: 0.7rem; }
+}
 </style>
 </head>
 <body>
 
-<div class="refl-topbar">
-  <span class="refl-topbar-brand">Woo Jung &middot; Coaching en Training</span>
-  <span class="refl-topbar-label">Reflectiekaarten &middot; COZOZ 4</span>
-</div>
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
 
-<!-- HEADER -->
-<section class="refl-header">
-  <div class="label">Reflectiekaarten &middot; COZOZ 4</div>
-  <h1>Vragen om <em>bij stil te staan</em></h1>
-  <p class="lead">Deze vragen zijn er niet om te beoordelen. Ze zijn er om bij stil te staan, op je eigen moment, op je eigen manier. Gebruik ze individueel, of pak er af en toe &eacute;&eacute;n op in een teamoverleg.</p>
-  <div class="divider"></div>
-</section>
+<div class="page">
 
-<!-- GOLF-INTRODUCTIE (alleen zichtbaar in kaartmodus) -->
-<div class="golf-intro" id="golf-intro" aria-live="polite">
-  <span id="golf-intro-text">Golf 1 <span class="sep">&middot;</span> Binnen drie dagen <span class="sep">&middot;</span> De teamdag is nog vers</span>
-</div>
+  <!-- NAV -->
+  <nav class="top-nav">
+    <span>Woo Jung &middot; Coaching en Training</span>
+    <span>Reflectiekaarten &middot; COZOZ 4</span>
+  </nav>
 
-<!-- TOGGLE -->
-<div class="toggle" role="tablist">
-  <button type="button" id="toggle-card" class="active" role="tab" aria-selected="true">&Eacute;&eacute;n voor &eacute;&eacute;n</button>
-  <button type="button" id="toggle-list" role="tab" aria-selected="false">Overzicht</button>
-</div>
-
-<!-- KAARTMODUS -->
-<section class="card-mode" id="card-mode" aria-labelledby="toggle-card">
-
-  <article class="refl-card" id="refl-card">
-    <div class="refl-card-progress">
-      <div class="refl-card-progress-fill" id="progress-fill"></div>
-    </div>
-    <div class="refl-card-body">
-      <div class="refl-card-meta">
-        <span class="refl-card-tag" id="card-tag">Golf 1 &middot; Ik</span>
-        <span class="refl-card-count" id="card-count">1 / 8</span>
-      </div>
-      <div class="refl-card-nr" id="card-nr">Vraag 1</div>
-      <div class="refl-card-text" id="card-text">Laden&hellip;</div>
-      <div class="refl-card-nav">
-        <button type="button" class="btn-prev" id="btn-prev">
-          <span aria-hidden="true">&larr;</span>
-          <span>Vorige</span>
-        </button>
-        <span class="nav-sep" aria-hidden="true"></span>
-        <button type="button" class="btn-next" id="btn-next">
-          <span>Volgende</span>
-          <span aria-hidden="true">&rarr;</span>
-        </button>
-      </div>
-    </div>
-  </article>
-
-  <!-- Interstitial (tussen golven) -->
-  <div class="interstitial" id="interstitial" role="status" aria-live="polite">
-    <div class="interstitial-tag" id="interstitial-tag">Golf 2</div>
-    <h2 class="interstitial-title" id="interstitial-title">Na <em>twee tot drie weken</em></h2>
-    <p class="interstitial-sub" id="interstitial-sub">De praktijk heeft zich laten zien.</p>
-    <button type="button" class="interstitial-btn" id="interstitial-btn">Verder naar golf 2</button>
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-label">Reflectiekaarten &middot; COZOZ 4</div>
+    <h1>Vragen om <em>bij stil te staan</em></h1>
+    <p class="lead">Deze vragen zijn er niet om te beoordelen. Ze zijn er om bij stil te staan, op je eigen moment, op je eigen manier. Gebruik ze individueel, of pak er af en toe een op in een teamoverleg.</p>
   </div>
 
-</section>
+  <div class="divider"></div>
 
-<!-- LIJSTMODUS -->
-<section class="list-mode hidden" id="list-mode" aria-labelledby="toggle-list">
-  <!-- Wordt gevuld door JS in stap 2 -->
-</section>
+  <!-- CONTROLS -->
+  <div class="controls">
+    <div class="golf-label" id="golfLabel"></div>
+    <div class="toggle" role="tablist">
+      <button type="button" id="btnCard" role="tab" class="active">E&eacute;n voor e&eacute;n</button>
+      <button type="button" id="btnList" role="tab">Overzicht</button>
+    </div>
+  </div>
 
-<!-- SLOTKAART -->
-<div class="slot-card">
-  <p class="slot-quote">Wat niet wordt uitgesproken, verdwijnt niet.<br>Het blijft ergens tussen mensen hangen.</p>
-  <div class="slot-brand">Woo Jung &middot; Coaching en Training</div>
+  <!-- CARD VIEW -->
+  <div class="card-view" id="cardView">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="card-meta">
+      <span class="card-laag" id="cardLaag"></span>
+      <span class="card-count" id="cardCount"></span>
+    </div>
+    <div class="card-content" id="cardContent"></div>
+    <div class="card-nav" id="cardNav"></div>
+  </div>
+
+  <!-- LIST VIEW -->
+  <div class="list-view hidden" id="listView"></div>
+
+  <!-- SLOTKAART -->
+  <div class="slotkaart">
+    <p>Wat niet wordt uitgesproken, verdwijnt niet.<br>Het blijft ergens tussen mensen hangen.</p>
+    <div class="brand">Woo Jung &middot; Coaching en Training</div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <a href="https://woojung.nl">woojung.nl</a>
+  </footer>
+
 </div>
 
-<footer class="refl-footer">
-  <a href="https://woojung.nl" class="refl-footer-link">woojung.nl</a>
-</footer>
-
 <script>
-const VRAGEN = [
-  {golf:1, laag:"IK", nr:1, tekst:"Wat heeft je tijdens de teamdag het meest geraakt, en waarom juist dat?"},
-  {golf:1, laag:"IK", nr:2, tekst:"Was er iets dat je wilde zeggen maar niet hebt gezegd? Wat hield je tegen?"},
-  {golf:1, laag:"IK", nr:3, tekst:"Wat heb je die dag over jezelf geleerd dat je wil onthouden?"},
-  {golf:1, laag:"WIJ", nr:4, tekst:"Wat heb je gehoord van een collega dat je nog niet wist of had verwacht?"},
-  {golf:1, laag:"WIJ", nr:5, tekst:"Er is die dag iets uitgesproken wat al een tijdje tussen mensen hing. Hoe voelt het dat dat er nu is?"},
-  {golf:1, laag:"WIJ", nr:6, tekst:"Welke afspraak die jullie hebben gemaakt voelt het meest concreet voor jou? Wat ga jij daar zelf in doen?"},
-  {golf:1, laag:"RICHTING", nr:7, tekst:"Als je terugdenkt aan de pijn die besproken is, onrust en verdeeldheid en het gevoel niet gezien te worden, wat is er nodig om dat niet terug te laten komen?"},
-  {golf:1, laag:"RICHTING", nr:8, tekst:"Wat wil je de komende dagen anders doen dan daarvoor?"},
-  {golf:2, laag:"IK", nr:9, tekst:"Heb je de afgelopen weken iets gedaan met wat je op de teamdag hebt uitgesproken? Zo ja: wat? Zo nee: wat hield je tegen?"},
-  {golf:2, laag:"IK", nr:10, tekst:"Was er een moment waarop je over iemand praatte in plaats van met diegene? Wat deed je ermee?"},
-  {golf:2, laag:"IK", nr:11, tekst:"Heb je iemand een compliment gegeven of waardering uitgesproken die je eerder voor je hield? Hoe voelde dat?"},
-  {golf:2, laag:"WIJ", nr:12, tekst:"Zijn er dingen die jullie hebben afgesproken maar waar het in de praktijk toch lastig bleek? Wat maakte het lastig?"},
-  {golf:2, laag:"WIJ", nr:13, tekst:"Spreek je collega's meer aan op wat er speelt, of merk je dat je er toch omheen loopt?"},
-  {golf:2, laag:"WIJ", nr:14, tekst:"Is er iemand in het team die jij meer vertrouwen hebt gegeven dan voor de teamdag? Wat heeft dat gedaan?"},
-  {golf:2, laag:"RICHTING", nr:15, tekst:"Het verleden in het verleden laten, hoe gaat dat in de praktijk? Wanneer lukt het, wanneer lukt het niet?"},
-  {golf:2, laag:"RICHTING", nr:16, tekst:"Wat heeft het team de afgelopen weken goed gedaan? Heb je dat ook gezegd?"},
-  {golf:3, laag:"IK", nr:17, tekst:"Gedraag jij je anders in dit team dan twee maanden geleden? Wat is er concreet anders?"},
-  {golf:3, laag:"IK", nr:18, tekst:"Is er iets wat je op de teamdag hebt beloofd, aan jezelf of aan een ander, waar je je niet aan hebt gehouden? Wat wil je daarmee doen?"},
-  {golf:3, laag:"IK", nr:19, tekst:"Wat heb jij bijgedragen aan een veiligere sfeer in het team? Wat wil je nog meer doen?"},
-  {golf:3, laag:"WIJ", nr:20, tekst:"Met elkaar praten in plaats van over elkaar, lukt dat? Wanneer gaat het goed, en wanneer glijdt het toch terug?"},
-  {golf:3, laag:"WIJ", nr:21, tekst:"Voelen mensen zich gezien en gewaardeerd in dit team? Hoe weet je dat?"},
-  {golf:3, laag:"WIJ", nr:22, tekst:"Is de verdeeldheid die er was verminderd? Wat heeft daaraan bijgedragen?"},
-  {golf:3, laag:"RICHTING", nr:23, tekst:"Waar is dit team over zes maanden trots op als het nu de goede stappen zet?"},
-  {golf:3, laag:"RICHTING", nr:24, tekst:"Wat heeft dit team nog nodig om echt als één team te werken? Wie of wat kan daarin helpen?"},
-  {golf:3, laag:"RICHTING", nr:25, tekst:"Als je één ding zou willen veranderen aan hoe jullie nu samenwerken, wat zou dat zijn? En wat doe jij daar zelf aan?"}
+// ════════════════════════════════════════════════════════════
+// DATA
+// ════════════════════════════════════════════════════════════
+var VRAGEN = [
+  {g:1, l:"IK", n:1, t:"Wat heeft je tijdens de teamdag het meest geraakt, en waarom juist dat?"},
+  {g:1, l:"IK", n:2, t:"Was er iets dat je wilde zeggen maar niet hebt gezegd? Wat hield je tegen?"},
+  {g:1, l:"IK", n:3, t:"Wat heb je die dag over jezelf geleerd dat je wil onthouden?"},
+  {g:1, l:"WIJ", n:4, t:"Wat heb je gehoord van een collega dat je nog niet wist of had verwacht?"},
+  {g:1, l:"WIJ", n:5, t:"Er is die dag iets uitgesproken wat al een tijdje tussen mensen hing. Hoe voelt het dat dat er nu is?"},
+  {g:1, l:"WIJ", n:6, t:"Welke afspraak die jullie hebben gemaakt voelt het meest concreet voor jou? Wat ga jij daar zelf in doen?"},
+  {g:1, l:"RICHTING", n:7, t:"Als je terugdenkt aan de pijn die besproken is, onrust en verdeeldheid en het gevoel niet gezien te worden, wat is er nodig om dat niet terug te laten komen?"},
+  {g:1, l:"RICHTING", n:8, t:"Wat wil je de komende dagen anders doen dan daarvoor?"},
+  {g:2, l:"IK", n:9, t:"Heb je de afgelopen weken iets gedaan met wat je op de teamdag hebt uitgesproken? Zo ja: wat? Zo nee: wat hield je tegen?"},
+  {g:2, l:"IK", n:10, t:"Was er een moment waarop je over iemand praatte in plaats van met diegene? Wat deed je ermee?"},
+  {g:2, l:"IK", n:11, t:"Heb je iemand een compliment gegeven of waardering uitgesproken die je eerder voor je hield? Hoe voelde dat?"},
+  {g:2, l:"WIJ", n:12, t:"Zijn er dingen die jullie hebben afgesproken maar waar het in de praktijk toch lastig bleek? Wat maakte het lastig?"},
+  {g:2, l:"WIJ", n:13, t:"Spreek je collega's meer aan op wat er speelt, of merk je dat je er toch omheen loopt?"},
+  {g:2, l:"WIJ", n:14, t:"Is er iemand in het team die jij meer vertrouwen hebt gegeven dan voor de teamdag? Wat heeft dat gedaan?"},
+  {g:2, l:"RICHTING", n:15, t:"Het verleden in het verleden laten, hoe gaat dat in de praktijk? Wanneer lukt het, wanneer lukt het niet?"},
+  {g:2, l:"RICHTING", n:16, t:"Wat heeft het team de afgelopen weken goed gedaan? Heb je dat ook gezegd?"},
+  {g:3, l:"IK", n:17, t:"Gedraag jij je anders in dit team dan twee maanden geleden? Wat is er concreet anders?"},
+  {g:3, l:"IK", n:18, t:"Is er iets wat je op de teamdag hebt beloofd, aan jezelf of aan een ander, waar je je niet aan hebt gehouden? Wat wil je daarmee doen?"},
+  {g:3, l:"IK", n:19, t:"Wat heb jij bijgedragen aan een veiligere sfeer in het team? Wat wil je nog meer doen?"},
+  {g:3, l:"WIJ", n:20, t:"Met elkaar praten in plaats van over elkaar, lukt dat? Wanneer gaat het goed, en wanneer glijdt het toch terug?"},
+  {g:3, l:"WIJ", n:21, t:"Voelen mensen zich gezien en gewaardeerd in dit team? Hoe weet je dat?"},
+  {g:3, l:"WIJ", n:22, t:"Is de verdeeldheid die er was verminderd? Wat heeft daaraan bijgedragen?"},
+  {g:3, l:"RICHTING", n:23, t:"Waar is dit team over zes maanden trots op als het nu de goede stappen zet?"},
+  {g:3, l:"RICHTING", n:24, t:"Wat heeft dit team nog nodig om echt als een team te werken? Wie of wat kan daarin helpen?"},
+  {g:3, l:"RICHTING", n:25, t:"Als je een ding zou willen veranderen aan hoe jullie nu samenwerken, wat zou dat zijn? En wat doe jij daar zelf aan?"}
 ];
-</script>
 
+var GOLF_INFO = {
+  1: {titel:"Golf 1", sub:"Binnen drie dagen", desc:"De teamdag is nog vers. Wat draag je mee?"},
+  2: {titel:"Golf 2", sub:"Na twee tot drie weken", desc:"De praktijk heeft zich laten zien."},
+  3: {titel:"Golf 3", sub:"Na zes tot acht weken", desc:"Nu weet je of er echt iets is veranderd."}
+};
+
+// ════════════════════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════════════════════
+var golf = 1;
+var idx = 0;
+var mode = "card";
+
+function golfVragen(g) { return VRAGEN.filter(function(v){return v.g===g;}); }
+
+function save() {
+  try {
+    sessionStorage.setItem("cozoz_r_g", golf);
+    sessionStorage.setItem("cozoz_r_i" + golf, idx);
+    sessionStorage.setItem("cozoz_r_m", mode);
+  } catch(e){}
+}
+function load() {
+  try {
+    var m = sessionStorage.getItem("cozoz_r_m");
+    if (m === "card" || m === "list") mode = m;
+    var g = parseInt(sessionStorage.getItem("cozoz_r_g"));
+    if (g >= 1 && g <= 3) golf = g;
+    var i = parseInt(sessionStorage.getItem("cozoz_r_i" + golf));
+    if (!isNaN(i) && i >= 0) idx = i;
+  } catch(e){}
+}
+
+// ════════════════════════════════════════════════════════════
+// DOM
+// ════════════════════════════════════════════════════════════
+var $cardView = document.getElementById("cardView");
+var $listView = document.getElementById("listView");
+var $btnCard = document.getElementById("btnCard");
+var $btnList = document.getElementById("btnList");
+var $golfLabel = document.getElementById("golfLabel");
+var $progressFill = document.getElementById("progressFill");
+var $cardLaag = document.getElementById("cardLaag");
+var $cardCount = document.getElementById("cardCount");
+var $cardContent = document.getElementById("cardContent");
+var $cardNav = document.getElementById("cardNav");
+
+// ════════════════════════════════════════════════════════════
+// GOLF LABEL
+// ════════════════════════════════════════════════════════════
+function updateLabel() {
+  var info = GOLF_INFO[golf];
+  $golfLabel.innerHTML = "<strong>" + info.titel + "</strong> &middot; " + info.sub + " &middot; " + info.desc;
+}
+
+// ════════════════════════════════════════════════════════════
+// CARD MODE
+// ════════════════════════════════════════════════════════════
+function renderCard() {
+  var vr = golfVragen(golf);
+  if (idx >= vr.length) idx = vr.length - 1;
+  if (idx < 0) idx = 0;
+  var v = vr[idx];
+  var total = vr.length;
+  var pct = ((idx + 1) / total) * 100;
+
+  $progressFill.style.width = pct + "%";
+  $cardLaag.textContent = "Golf " + v.g + " \u00B7 " + v.l;
+  $cardCount.textContent = (idx + 1) + " van " + total;
+
+  $cardContent.className = "card-content";
+  $cardContent.innerHTML = '<div class="card-nr">' + v.n + '</div><div class="card-tekst">' + v.t + '</div>';
+  void $cardContent.offsetWidth;
+  $cardContent.className = "card-content fade-in";
+
+  // Nav
+  var prevHtml = "";
+  var nextHtml = "";
+
+  if (idx > 0 || golf > 1) {
+    prevHtml = '<button type="button" class="nav-btn" onclick="goPrev()">\u2190 vorige</button>';
+  } else {
+    prevHtml = '<span class="nav-spacer"></span>';
+  }
+
+  if (idx < total - 1) {
+    nextHtml = '<button type="button" class="nav-btn" onclick="goNext()">volgende \u2192</button>';
+  } else if (golf < 3) {
+    nextHtml = '<button type="button" class="nav-btn golf-next" onclick="goNextGolf()">Naar golf ' + (golf + 1) + ' \u2192</button>';
+  } else {
+    nextHtml = '<span class="nav-end">Dat was de laatste vraag.</span>';
+  }
+
+  $cardNav.innerHTML = prevHtml + nextHtml;
+
+  updateLabel();
+  save();
+}
+
+function goNext() {
+  var vr = golfVragen(golf);
+  if (idx < vr.length - 1) { idx++; renderCard(); }
+}
+function goPrev() {
+  if (idx > 0) {
+    idx--;
+    renderCard();
+  } else if (golf > 1) {
+    golf--;
+    var vr = golfVragen(golf);
+    idx = vr.length - 1;
+    renderCard();
+  }
+}
+function goNextGolf() {
+  if (golf < 3) { golf++; idx = 0; renderCard(); }
+}
+
+// ════════════════════════════════════════════════════════════
+// LIST MODE
+// ════════════════════════════════════════════════════════════
+function renderList() {
+  var html = "";
+  for (var g = 1; g <= 3; g++) {
+    var info = GOLF_INFO[g];
+    var vr = golfVragen(g);
+    html += '<div class="list-golf">';
+    html += '<div class="list-golf-header">';
+    html += '<div class="list-golf-title">' + info.titel + '</div>';
+    html += '<div class="list-golf-sub">' + info.sub + ' &middot; ' + info.desc + '</div>';
+    html += '</div>';
+
+    var curLaag = "";
+    for (var i = 0; i < vr.length; i++) {
+      var v = vr[i];
+      if (v.l !== curLaag) {
+        curLaag = v.l;
+        html += '<div class="list-laag">' + v.l + '</div>';
+      }
+      html += '<div class="list-card">';
+      html += '<span class="list-nr">' + v.n + '</span>';
+      html += '<span class="list-tekst">' + v.t + '</span>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+  $listView.innerHTML = html;
+
+  // Fade-in per golf
+  if ("IntersectionObserver" in window) {
+    var sections = $listView.querySelectorAll(".list-golf");
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); }
+      });
+    }, {threshold: 0.05});
+    sections.forEach(function(s) { s.classList.add("will-animate"); obs.observe(s); });
+  }
+
+  updateLabel();
+  save();
+}
+
+// ════════════════════════════════════════════════════════════
+// TOGGLE
+// ════════════════════════════════════════════════════════════
+function setMode(m) {
+  mode = m;
+  if (mode === "card") {
+    $cardView.classList.remove("hidden");
+    $listView.classList.add("hidden");
+    $btnCard.classList.add("active");
+    $btnCard.setAttribute("aria-selected", "true");
+    $btnList.classList.remove("active");
+    $btnList.setAttribute("aria-selected", "false");
+    renderCard();
+  } else {
+    $cardView.classList.add("hidden");
+    $listView.classList.remove("hidden");
+    $btnList.classList.add("active");
+    $btnList.setAttribute("aria-selected", "true");
+    $btnCard.classList.remove("active");
+    $btnCard.setAttribute("aria-selected", "false");
+    renderList();
+  }
+  save();
+}
+
+$btnCard.addEventListener("click", function() { setMode("card"); });
+$btnList.addEventListener("click", function() { setMode("list"); });
+
+// ════════════════════════════════════════════════════════════
+// KEYBOARD NAV
+// ════════════════════════════════════════════════════════════
+document.addEventListener("keydown", function(e) {
+  if (mode !== "card") return;
+  if (e.key === "ArrowRight" || e.key === "Right") goNext();
+  if (e.key === "ArrowLeft" || e.key === "Left") goPrev();
+});
+
+// ════════════════════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════════════════════
+load();
+setMode(mode);
+</script>
 </body>
 </html>
