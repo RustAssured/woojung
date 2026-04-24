@@ -388,6 +388,65 @@ textarea::placeholder {
 }
 .footer a:hover { color: var(--ink); }
 
+/* DEELBLOK */
+.share-block {
+  max-width: 620px;
+  margin: 2.5rem auto 0;
+  padding: 1rem 1.5rem;
+  background: rgba(255,255,255,0.4);
+  border: 1px solid var(--line);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.share-block p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 0.85rem;
+}
+.share-btn {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  border: 1px solid var(--line);
+  background: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+.share-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.share-btn.copied {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+.share-fallback {
+  display: none;
+  margin-top: 0.6rem;
+}
+.share-fallback input {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.6);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  color: var(--ink);
+  text-align: center;
+  outline: none;
+}
+.share-fallback input:focus {
+  border-color: var(--accent);
+}
+
 /* RESPONSIVE */
 @media (max-width: 600px) {
   .topbar { padding: 1rem 1.25rem; flex-wrap: wrap; gap: 0.35rem; }
@@ -419,6 +478,14 @@ textarea::placeholder {
   <p class="lead">We zijn benieuwd hoe je de teamdag hebt ervaren. Het invullen duurt 2 tot 3 minuten en is volledig anoniem. Je input helpt om te leren en om eventuele vervolgstappen goed aan te laten sluiten.</p>
   <div class="divider"></div>
 </section>
+
+<div class="share-block">
+  <p>Dit formulier is ook direct te delen met teamleden. Zij krijgen alleen deze pagina te zien, zonder toegang tot het portaal.</p>
+  <button type="button" class="share-btn" id="share-btn">Kopieer deellink</button>
+  <div class="share-fallback" id="share-fallback">
+    <input type="text" id="share-url" readonly>
+  </div>
+</div>
 
 <div class="form-wrap">
 
@@ -500,6 +567,26 @@ document.getElementById('waardevol').addEventListener('input', function() {
 });
 document.getElementById('bespreekbaar').addEventListener('input', function() {
   document.getElementById('bespreekbaar-val').textContent = this.value;
+});
+
+document.getElementById('share-btn').addEventListener('click', function() {
+  var btn = this;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(window.location.href).then(function() {
+      btn.textContent = 'Gekopieerd!';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = 'Kopieer deellink';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  } else {
+    var fallback = document.getElementById('share-fallback');
+    var urlInput = document.getElementById('share-url');
+    fallback.style.display = 'block';
+    urlInput.value = window.location.href;
+    urlInput.select();
+  }
 });
 
 document.getElementById('feedback-form').addEventListener('submit', function(e) {

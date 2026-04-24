@@ -448,13 +448,7 @@ p:last-child { margin-bottom: 0; }
 .tile:nth-child(3) { animation-delay: 0.5s; }
 .tile:nth-child(4) { animation-delay: 0.6s; }
 .tile:nth-child(5) { animation-delay: 0.7s; }
-
-.tile:nth-child(5) {
-  grid-column: 1 / -1;
-  max-width: calc(50% - 0.75rem);
-  justify-self: center;
-  width: 100%;
-}
+.tile:nth-child(6) { animation-delay: 0.8s; }
 
 .tile::before {
   content: '';
@@ -809,7 +803,6 @@ p:last-child { margin-bottom: 0; }
   .portal-nav .klant-label { font-size: 0.62rem; letter-spacing: 0.18em; }
   .pin-inputs input { width: 48px; height: 60px; font-size: 1.4rem; }
   .tiles { grid-template-columns: 1fr; gap: 1rem; }
-  .tile:nth-child(5) { max-width: 100%; grid-column: auto; justify-self: stretch; }
   .dash-wrap { padding: 2.5rem 1.25rem 1.5rem; }
   .wrap { padding: 2.5rem 1.5rem 1rem; }
   .block { padding: 3rem 1.5rem; }
