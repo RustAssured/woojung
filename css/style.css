@@ -8,7 +8,7 @@
   --cream: #F7F4EF;
   --cream2: #EDE8DF;
   --ink: #1C1917;
-  --ink-mid: #4A4540;
+  --ink-mid: #3a3832;
   --ink-soft: #8A8178;
   --white: #FDFBF8;
 }
@@ -286,7 +286,7 @@ nav.scrolled {
 .waarde p {
   font-size: 14px;
   line-height: 1.75;
-  color: var(--ink-soft);
+  color: var(--ink-mid);
 }
 
 /* AANPAK */
@@ -560,7 +560,7 @@ nav.scrolled {
 
 .diensten-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
 
