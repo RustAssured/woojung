@@ -57,4 +57,34 @@
       });
     });
   }
+  // Mini reflectie demo
+  var demoVragen = [
+    { nr: 'Vraag 1', tekst: 'Wat heb je de afgelopen week niet gezegd, dat je eigenlijk had willen zeggen?' },
+    { nr: 'Vraag 2', tekst: 'Hoe zou het voelen als je collega\'s echt wisten wat je nodig hebt?' },
+    { nr: 'Vraag 3', tekst: 'Wat zou er veranderen als iedereen in dit team zei wat ze dachten?' }
+  ];
+  var demoIdx = 0;
+  var demoNr = document.getElementById('demo-nr');
+  var demoText = document.getElementById('demo-text');
+  var demoDots = document.querySelectorAll('.demo-dot');
+  var demoPrev = document.getElementById('demo-prev');
+  var demoNext = document.getElementById('demo-next');
+
+  if (demoNr && demoText) {
+    function showDemo(idx) {
+      demoText.classList.add('fading');
+      setTimeout(function() {
+        demoIdx = ((idx % demoVragen.length) + demoVragen.length) % demoVragen.length;
+        demoNr.textContent = demoVragen[demoIdx].nr;
+        demoText.textContent = demoVragen[demoIdx].tekst;
+        demoText.classList.remove('fading');
+        demoDots.forEach(function(d, i) { d.classList.toggle('active', i === demoIdx); });
+      }, 300);
+    }
+    demoDots.forEach(function(dot) {
+      dot.addEventListener('click', function() { showDemo(parseInt(this.dataset.idx, 10)); });
+    });
+    if (demoPrev) demoPrev.addEventListener('click', function() { showDemo(demoIdx - 1); });
+    if (demoNext) demoNext.addEventListener('click', function() { showDemo(demoIdx + 1); });
+  }
 })();

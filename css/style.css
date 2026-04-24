@@ -372,6 +372,123 @@ nav.scrolled {
   color: rgba(255,255,255,0.55);
 }
 
+/* NA DE DAG */
+.nadag-wrap {
+  padding: 8rem 4rem;
+  background: var(--cream);
+}
+.nadag-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.nadag-icon {
+  width: 36px;
+  height: auto;
+  opacity: 0.45;
+  margin-bottom: 1.25rem;
+}
+.nadag-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1.25;
+  margin-bottom: 2rem;
+}
+.nadag-prose p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--ink-mid);
+  margin-bottom: 1.25rem;
+}
+.nadag-prose p:last-child { margin-bottom: 0; }
+
+.demo-wrap {
+  max-width: 580px;
+  margin: 2.5rem auto 0;
+}
+.demo-label {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--ink-soft);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.demo-card {
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(0,0,0,0.09);
+  padding: 2.5rem 2rem;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.demo-card-nr {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.demo-card-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.15rem, 2.2vw, 1.35rem);
+  color: var(--celadon-dark);
+  max-width: 440px;
+  line-height: 1.55;
+  transition: opacity 0.3s ease;
+}
+.demo-card-text.fading { opacity: 0; }
+
+.demo-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+}
+.demo-dots {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+.demo-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: none;
+  border: 1px solid var(--gold);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s;
+}
+.demo-dot.active { background: var(--gold); }
+.demo-arrow {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  transition: color 0.2s;
+}
+.demo-arrow:hover { color: var(--celadon-dark); }
+
+.demo-footer {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--ink-soft);
+  text-align: center;
+  margin-top: 1.5rem;
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
 /* VOOR WIE */
 .voorwie-wrap {
   padding: 8rem 4rem;
@@ -742,6 +859,8 @@ footer {
   .aanpak-wrap { padding: 5rem 1.5rem; }
   .aanpak-kop { grid-template-columns: 1fr; gap: 2rem; }
   .stappen { grid-template-columns: 1fr; }
+  .nadag-wrap { padding: 5rem 1.5rem; }
+  .demo-wrap { padding: 0 0.25rem; }
   .voorwie-wrap { padding: 5rem 1.5rem; }
   .voorwie-inner { grid-template-columns: 1fr; gap: 3rem; }
   .diensten-wrap { padding: 5rem 1.5rem; }
