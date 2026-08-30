@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mijn kaart &middot; Anker &amp; Kompas</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="ak-style.css">
+  <style>
+    @media print {
+      .ak-section--invoer { display: none !important; }
+      .ak-card-preview    { margin-top: 0; }
+      .ak-print-title     { display: block !important; margin-bottom: 1.5rem; }
+    }
+    .ak-print-title { display: none; }
+    .ak-import-error { color: #8c4a3a; font-size: 0.82rem; margin-top: 0.5rem; display: none; }
+    .ak-import-error.zichtbaar { display: block; }
+    #bestand-import { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+  </style>
+</head>
+<body>
+
+<nav class="ak-nav" role="navigation" aria-label="Hoofdnavigatie">
+  <a href="index.html" class="ak-nav-brand">Anker &amp; Kompas</a>
+  <ul class="ak-nav-links" role="list">
+    <li><a href="checkin.html">Check-in</a></li>
+    <li><a href="kaart.html" class="ak-current" aria-current="page">Mijn kaart</a></li>
+    <li><a href="zelfkompassie.html">Zelfkompassie</a></li>
+    <li><a href="privacy.html">Privacy</a></li>
+  </ul>
+</nav>
+
+<main class="ak-main" id="hoofdinhoud">
+
+  <h1 class="ak-print-title" aria-hidden="true">Mijn Anker &amp; Kompas-kaart</h1>
+
+  <section class="ak-section ak-section--invoer" aria-labelledby="paginatitel">
+    <span class="ak-label">Mijn kaart</span>
+    <h1 class="ak-title" id="paginatitel">Mijn Anker &amp; <em>Kompas</em></h1>
+    <p class="ak-subtitle">Vul in wat voor jou klopt. Er is geen goede of foute versie.</p>
+    <div class="ak-divider" aria-hidden="true"></div>
+    <p class="ak-prose">Je kaart wordt automatisch opgeslagen op dit apparaat terwijl je typt.</p>
+  </section>
+
+  <section class="ak-section ak-section--invoer" aria-label="Kaart invullen">
+    <div id="kaart-form">
+
+      <div class="ak-field">
+        <label for="anker">Mijn anker</label>
+        <span class="ak-hint">Als het onrustig wordt, mag ik mezelf herinneren aan...</span>
+        <textarea id="anker" name="anker" class="ak-tall" rows="4" autocomplete="off" spellcheck="true" placeholder="Wat houdt me in balans?"></textarea>
+      </div>
+
+      <div class="ak-field-group" role="group" aria-labelledby="kompas-label">
+        <div class="ak-field-group-title" id="kompas-label">Mijn kompas</div>
+        <div class="ak-field">
+          <label for="bijdragen">Ik wil bijdragen aan...</label>
+          <textarea id="bijdragen" name="bijdragen" rows="3" autocomplete="off" spellcheck="true" placeholder="Wat wil ik bijdragen, in mijn werk of leven?"></textarea>
+        </div>
+        <div class="ak-field">
+          <label for="door">door...</label>
+          <textarea id="door" name="door" rows="2" autocomplete="off" spellcheck="true" placeholder="Hoe wil ik dat doen?"></textarea>
+        </div>
+        <div class="ak-field">
+          <label for="wanneer">ook wanneer...</label>
+          <textarea id="wanneer" name="wanneer" rows="2" autocomplete="off" spellcheck="true" placeholder="Zelfs als het moeilijk is, of als..."></textarea>
+        </div>
+      </div>
+
+      <div class="ak-field">
+        <label for="compassiezin">Mijn compassiezin</label>
+        <span class="ak-hint">Wanneer het niet perfect gaat, mag ik tegen mezelf zeggen...</span>
+        <textarea id="compassiezin" name="compassiezin" rows="3" autocomplete="off" spellcheck="true" placeholder="Een vriendelijke zin voor moeilijke momenten..."></textarea>
+      </div>
+
+      <div class="ak-field">
+        <label for="kleineStap">Mijn kleine stap</label>
+        <span class="ak-hint">Deze week of maand kies ik voor...</span>
+        <textarea id="kleineStap" name="kleineStap" rows="3" autocomplete="off" spellcheck="true" placeholder="Eén kleine, concrete stap..."></textarea>
+      </div>
+
+    </div>
+
+    <div class="ak-btn-group" role="group" aria-label="Kaart opslaan en exporteren">
+      <button type="button" class="ak-btn ak-btn--primary" id="btn-opslaan">Bewaar op dit apparaat</button>
+      <button type="button" class="ak-btn ak-btn--ghost" id="btn-download-txt">Download als tekst</button>
+      <button type="button" class="ak-btn ak-btn--ghost" id="btn-download-json">Download als JSON</button>
+      <button type="button" class="ak-btn ak-btn--muted" id="btn-print">Print mijn kaart</button>
+      <span class="ak-notice" id="opslaan-melding" aria-live="polite" aria-atomic="true"></span>
+    </div>
+
+    <div class="ak-btn-group" style="margin-top:0.4rem;">
+      <input type="file" id="bestand-import" accept=".json,application/json" aria-label="Importeer kaart vanuit JSON-bestand">
+      <button type="button" class="ak-btn ak-btn--muted" id="btn-import">Importeer eerdere kaart (.json)</button>
+      <button type="button" class="ak-btn ak-btn--danger" id="btn-verwijder">Verwijder alles van dit apparaat</button>
+    </div>
+    <p class="ak-import-error" id="import-fout" role="alert"></p>
+  </section>
+
+  <section aria-labelledby="preview-label">
+    <div class="ak-card-preview" id="kaart-preview">
+      <p class="ak-card-preview-label" id="preview-label">Mijn kaart &middot; Anker &amp; Kompas</p>
+      <div class="ak-card-block">
+        <div class="ak-card-block-label">Mijn anker</div>
+        <div class="ak-card-block-text ak-empty" id="preview-anker" data-leeg="Als het onrustig wordt, mag ik mezelf herinneren aan...">Als het onrustig wordt, mag ik mezelf herinneren aan...</div>
+      </div>
+      <div class="ak-card-block">
+        <div class="ak-card-block-label">Mijn kompas</div>
+        <div class="ak-card-kompas">
+          <div class="ak-card-kompas-item">
+            <div class="ak-card-block-label">Bijdragen aan</div>
+            <div class="ak-card-block-text ak-empty" id="preview-bijdragen" data-leeg="...">...</div>
+          </div>
+          <div class="ak-card-kompas-item">
+            <div class="ak-card-block-label">door</div>
+            <div class="ak-card-block-text ak-empty" id="preview-door" data-leeg="...">...</div>
+          </div>
+          <div class="ak-card-kompas-item">
+            <div class="ak-card-block-label">ook wanneer</div>
+            <div class="ak-card-block-text ak-empty" id="preview-wanneer" data-leeg="...">...</div>
+          </div>
+        </div>
+      </div>
+      <div class="ak-card-block">
+        <div class="ak-card-block-label">Mijn compassiezin</div>
+        <div class="ak-card-block-text ak-empty" id="preview-compassiezin" data-leeg="Wanneer het niet perfect gaat, mag ik tegen mezelf zeggen...">Wanneer het niet perfect gaat, mag ik tegen mezelf zeggen...</div>
+      </div>
+      <div class="ak-card-block">
+        <div class="ak-card-block-label">Mijn kleine stap</div>
+        <div class="ak-card-block-text ak-empty" id="preview-kleineStap" data-leeg="Deze week of maand kies ik voor...">Deze week of maand kies ik voor...</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ak-footer">
+  <p>Jouw antwoorden worden alleen lokaal opgeslagen. <a href="privacy.html">Privacy</a></p>
+</footer>
+
+<script src="ak-app.js"></script>
+<script>
+(function () {
+  'use strict';
+  var veldNamen = ['anker', 'bijdragen', 'door', 'wanneer', 'compassiezin', 'kleineStap'];
+  var form    = document.getElementById('kaart-form');
+  var melding = document.getElementById('opslaan-melding');
+
+  function bijwerkenPreview() {
+    veldNamen.forEach(function (naam) {
+      var invoer  = document.getElementById(naam);
+      var preview = document.getElementById('preview-' + naam);
+      if (!invoer || !preview) return;
+      var waarde = invoer.value.trim();
+      if (waarde) { preview.textContent = invoer.value; preview.classList.remove('ak-empty'); }
+      else { preview.textContent = preview.dataset.leeg || ''; preview.classList.add('ak-empty'); }
+    });
+  }
+
+  var opgeslagen = AK.load(AK.KEYS.CARD);
+  if (opgeslagen) AK.populateForm(form, opgeslagen);
+  bijwerkenPreview();
+
+  var autoOpslaan = AK.debounce(function () { AK.save(AK.KEYS.CARD, AK.collectForm(form)); }, 700);
+  form.addEventListener('input', function () { bijwerkenPreview(); autoOpslaan(); });
+
+  document.getElementById('btn-opslaan').addEventListener('click', function () {
+    AK.save(AK.KEYS.CARD, AK.collectForm(form));
+    AK.showNotice(melding, 'Opgeslagen op dit apparaat.');
+  });
+  document.getElementById('btn-download-txt').addEventListener('click', function () {
+    AK.downloadFile('mijn-anker-kompas.txt', AK.cardNaarTekst(AK.collectForm(form)), 'text/plain;charset=utf-8');
+  });
+  document.getElementById('btn-download-json').addEventListener('click', function () {
+    AK.downloadFile('mijn-anker-kompas.json', JSON.stringify(AK.collectForm(form), null, 2), 'application/json');
+  });
+  document.getElementById('btn-print').addEventListener('click', function () { window.print(); });
+
+  var bestandInput = document.getElementById('bestand-import');
+  var importFout   = document.getElementById('import-fout');
+  document.getElementById('btn-import').addEventListener('click', function () {
+    importFout.textContent = ''; importFout.classList.remove('zichtbaar'); bestandInput.click();
+  });
+  bestandInput.addEventListener('change', function () {
+    var bestand = bestandInput.files[0];
+    if (!bestand) return;
+    bestandInput.value = '';
+    AK.importeerKaartJson(bestand, function (fout, data) {
+      if (fout) { importFout.textContent = fout; importFout.classList.add('zichtbaar'); return; }
+      AK.populateForm(form, data); bijwerkenPreview();
+      AK.save(AK.KEYS.CARD, AK.collectForm(form));
+      AK.showNotice(melding, 'Kaart geimporteerd en opgeslagen.');
+    });
+  });
+
+  AK.koppelVerwijderKnop(document.getElementById('btn-verwijder'), function () {
+    veldNamen.forEach(function (naam) { var el = document.getElementById(naam); if (el) el.value = ''; });
+    bijwerkenPreview();
+    AK.showNotice(melding, 'Alle gegevens verwijderd van dit apparaat.');
+  });
+})();
+</script>
+
+</body>
+</html>
