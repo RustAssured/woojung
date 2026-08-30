@@ -5,26 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mijn kaart &middot; Anker &amp; Kompas</title>
   <meta name="robots" content="noindex, nofollow">
-  <link rel="stylesheet" href="ak-style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
   <style>
-    @media print {
-      .ak-section--invoer { display: none !important; }
-      .ak-card-preview    { margin-top: 0; }
-      .ak-print-title     { display: block !important; margin-bottom: 1.5rem; }
-    }
-    .ak-print-title { display: none; }
-    .ak-import-error { color: #8c4a3a; font-size: 0.82rem; margin-top: 0.5rem; display: none; }
+    nav { position: sticky !important; top: 0; background: rgba(247,244,239,0.97) !important; backdrop-filter: blur(8px); border-bottom: 0.5px solid rgba(111,143,136,0.18) !important; z-index: 100; }
+    .nav-ak { font-size: 14px !important; letter-spacing: 2px !important; }
+    .nav-current { color: var(--celadon-dark) !important; border-bottom: 1px solid var(--gold) !important; }
+    .ak-main { max-width: 700px; margin: 0 auto; padding: 4rem 1.75rem; }
+    .ak-section { margin-bottom: 4rem; }
+    .ak-label { display: block; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+    .ak-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 2.9rem); font-weight: 300; color: var(--ink); line-height: 1.15; margin-bottom: 0.5rem; }
+    .ak-title em { font-style: italic; color: var(--celadon-dark); }
+    .ak-subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.05rem, 2.5vw, 1.25rem); color: var(--ink-mid); margin-bottom: 1.75rem; line-height: 1.45; }
+    .ak-prose { font-size: 16px; line-height: 1.88; color: var(--ink-mid); }
+    .ak-divider { width: 36px; height: 1.5px; background: var(--gold); margin: 1.75rem 0; opacity: 0.65; }
+    .ak-field { margin-bottom: 1.75rem; }
+    .ak-field label { display: block; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: var(--ink); margin-bottom: 0.25rem; cursor: pointer; line-height: 1.4; }
+    .ak-hint { display: block; font-size: 13px; color: var(--ink-soft); margin-bottom: 0.5rem; font-style: italic; }
+    .ak-field textarea { width: 100%; padding: 0.8rem 1rem; background: var(--white); border: 0.5px solid rgba(168,197,188,0.5); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--ink-mid); line-height: 1.7; resize: vertical; min-height: 100px; transition: border-color 0.2s, box-shadow 0.2s; -webkit-appearance: none; appearance: none; }
+    .ak-field textarea:focus { outline: none; border-color: rgba(111,143,136,0.7); box-shadow: 0 0 0 3px rgba(111,143,136,0.1); }
+    .ak-field textarea.ak-tall { min-height: 150px; }
+    .ak-field-group { border: 0.5px solid rgba(168,197,188,0.3); border-radius: 12px; padding: 1.75rem; background: var(--white); margin-bottom: 1.75rem; }
+    .ak-field-group .ak-field { margin-bottom: 1rem; }
+    .ak-field-group .ak-field:last-child { margin-bottom: 0; }
+    .ak-field-group-title { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; }
+    .ak-field-group-title::before { content: ''; width: 20px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    .ak-btn-group { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: 1.75rem; align-items: center; }
+    .btn-danger { background: transparent; color: #8c4a3a; border: 0.5px solid rgba(140,74,58,0.35); border-radius: 40px; padding: 10px 22px; font-family: 'DM Sans', sans-serif; font-size: 13px; cursor: pointer; transition: background 0.2s; text-decoration: none; display: inline-block; }
+    .btn-danger:hover { background: rgba(140,74,58,0.06); }
+    .btn-muted { background: transparent; color: var(--ink-soft); border: 0.5px solid rgba(138,129,120,0.45); border-radius: 40px; padding: 10px 22px; font-family: 'DM Sans', sans-serif; font-size: 13px; cursor: pointer; transition: border-color 0.2s; text-decoration: none; display: inline-block; }
+    .btn-muted:hover { border-color: var(--ink-soft); }
+    .ak-notice { display: inline-block; padding: 6px 14px; background: rgba(111,143,136,0.1); color: var(--celadon-dark); border: 0.5px solid rgba(111,143,136,0.3); font-size: 12px; border-radius: 40px; opacity: 0; transition: opacity 0.35s; pointer-events: none; vertical-align: middle; }
+    .ak-notice.ak-visible { opacity: 1; }
+    .ak-import-error { color: #8c4a3a; font-size: 13px; margin-top: 0.5rem; display: none; }
     .ak-import-error.zichtbaar { display: block; }
     #bestand-import { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+    .ak-card-preview { background: var(--white); border: 0.5px solid rgba(168,197,188,0.35); border-radius: 12px; padding: 2.75rem; margin-top: 4rem; position: relative; overflow: hidden; }
+    .ak-card-preview::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--celadon-light), var(--gold)); opacity: 0.7; }
+    .ak-card-preview-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 1.75rem; font-style: italic; font-family: 'Cormorant Garamond', serif; }
+    .ak-card-block { margin-bottom: 1.75rem; padding-bottom: 1.75rem; border-bottom: 0.5px solid rgba(168,197,188,0.25); }
+    .ak-card-block:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .ak-card-block-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.35rem; }
+    .ak-card-block-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: var(--ink); line-height: 1.65; white-space: pre-wrap; word-break: break-word; min-height: 1.65em; }
+    .ak-card-block-text.ak-empty { color: var(--ink-soft); font-style: normal; font-family: 'DM Sans', sans-serif; font-size: 14px; }
+    .ak-card-kompas { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 0.5rem; }
+    .ak-card-kompas-item .ak-card-block-label { font-size: 9px; }
+    .ak-print-title { display: none; }
+    .ak-footer { margin-top: 6rem; padding: 2.75rem 1.75rem; border-top: 0.5px solid rgba(111,143,136,0.15); text-align: center; font-size: 12px; color: var(--ink-soft); line-height: 1.65; }
+    .ak-footer a { color: var(--celadon-dark); text-decoration: none; border-bottom: 1px solid rgba(45,107,98,0.3); }
+    @media print {
+      nav, .ak-btn-group, .ak-field, .ak-field-group, .ak-footer, .ak-notice, .ak-section--invoer { display: none !important; }
+      body { background: white; color: black; }
+      .ak-main { max-width: 100%; padding: 1cm 1.5cm; }
+      .ak-card-preview { border: none; padding: 0; margin-top: 1cm; }
+      .ak-card-preview::before { display: none; }
+      .ak-card-block { page-break-inside: avoid; }
+      .ak-print-title { display: block !important; font-family: 'Cormorant Garamond', serif; font-size: 24pt; font-weight: 300; margin-bottom: 1.5rem; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 0.9rem 1.1rem !important; }
+      .ak-main { padding: 2.5rem 1.1rem; }
+      .ak-btn-group { flex-direction: column; align-items: flex-start; }
+      .ak-card-preview { padding: 1.75rem; }
+      .ak-card-kompas { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
 
-<nav class="ak-nav" role="navigation" aria-label="Hoofdnavigatie">
-  <a href="index.html" class="ak-nav-brand">Anker &amp; Kompas</a>
-  <ul class="ak-nav-links" role="list">
+<nav>
+  <a class="nav-name nav-ak" href="../index.html">Anker &amp; Kompas</a>
+  <ul class="nav-links">
     <li><a href="checkin.html">Check-in</a></li>
-    <li><a href="kaart.html" class="ak-current" aria-current="page">Mijn kaart</a></li>
+    <li><a href="kaart.html" class="nav-current">Mijn kaart</a></li>
     <li><a href="zelfkompassie.html">Zelfkompassie</a></li>
     <li><a href="privacy.html">Privacy</a></li>
   </ul>
@@ -32,7 +86,7 @@
 
 <main class="ak-main" id="hoofdinhoud">
 
-  <h1 class="ak-print-title" aria-hidden="true">Mijn Anker &amp; Kompas-kaart</h1>
+  <h1 class="ak-print-title">Mijn Anker &amp; Kompas-kaart</h1>
 
   <section class="ak-section ak-section--invoer" aria-labelledby="paginatitel">
     <span class="ak-label">Mijn kaart</span>
@@ -47,52 +101,52 @@
 
       <div class="ak-field">
         <label for="anker">Mijn anker</label>
-        <span class="ak-hint">Als het onrustig wordt, mag ik mezelf herinneren aan...</span>
+        <span class="ak-hint">Als het onrustig wordt, mag ik mezelf herinneren aan&hellip;</span>
         <textarea id="anker" name="anker" class="ak-tall" rows="4" autocomplete="off" spellcheck="true" placeholder="Wat houdt me in balans?"></textarea>
       </div>
 
       <div class="ak-field-group" role="group" aria-labelledby="kompas-label">
         <div class="ak-field-group-title" id="kompas-label">Mijn kompas</div>
         <div class="ak-field">
-          <label for="bijdragen">Ik wil bijdragen aan...</label>
+          <label for="bijdragen">Ik wil bijdragen aan&hellip;</label>
           <textarea id="bijdragen" name="bijdragen" rows="3" autocomplete="off" spellcheck="true" placeholder="Wat wil ik bijdragen, in mijn werk of leven?"></textarea>
         </div>
         <div class="ak-field">
-          <label for="door">door...</label>
+          <label for="door">door&hellip;</label>
           <textarea id="door" name="door" rows="2" autocomplete="off" spellcheck="true" placeholder="Hoe wil ik dat doen?"></textarea>
         </div>
         <div class="ak-field">
-          <label for="wanneer">ook wanneer...</label>
+          <label for="wanneer">ook wanneer&hellip;</label>
           <textarea id="wanneer" name="wanneer" rows="2" autocomplete="off" spellcheck="true" placeholder="Zelfs als het moeilijk is, of als..."></textarea>
         </div>
       </div>
 
       <div class="ak-field">
         <label for="compassiezin">Mijn compassiezin</label>
-        <span class="ak-hint">Wanneer het niet perfect gaat, mag ik tegen mezelf zeggen...</span>
+        <span class="ak-hint">Wanneer het niet perfect gaat, mag ik tegen mezelf zeggen&hellip;</span>
         <textarea id="compassiezin" name="compassiezin" rows="3" autocomplete="off" spellcheck="true" placeholder="Een vriendelijke zin voor moeilijke momenten..."></textarea>
       </div>
 
       <div class="ak-field">
         <label for="kleineStap">Mijn kleine stap</label>
-        <span class="ak-hint">Deze week of maand kies ik voor...</span>
-        <textarea id="kleineStap" name="kleineStap" rows="3" autocomplete="off" spellcheck="true" placeholder="Eén kleine, concrete stap..."></textarea>
+        <span class="ak-hint">Deze week of maand kies ik voor&hellip;</span>
+        <textarea id="kleineStap" name="kleineStap" rows="3" autocomplete="off" spellcheck="true" placeholder="&Eacute;&eacute;n kleine, concrete stap..."></textarea>
       </div>
 
     </div>
 
     <div class="ak-btn-group" role="group" aria-label="Kaart opslaan en exporteren">
-      <button type="button" class="ak-btn ak-btn--primary" id="btn-opslaan">Bewaar op dit apparaat</button>
-      <button type="button" class="ak-btn ak-btn--ghost" id="btn-download-txt">Download als tekst</button>
-      <button type="button" class="ak-btn ak-btn--ghost" id="btn-download-json">Download als JSON</button>
-      <button type="button" class="ak-btn ak-btn--muted" id="btn-print">Print mijn kaart</button>
+      <button type="button" class="btn-primary" id="btn-opslaan">Bewaar op dit apparaat</button>
+      <button type="button" class="btn-ghost" id="btn-download-txt">Download als tekst</button>
+      <button type="button" class="btn-ghost" id="btn-download-json">Download als JSON</button>
+      <button type="button" class="btn-muted" id="btn-print">Print mijn kaart</button>
       <span class="ak-notice" id="opslaan-melding" aria-live="polite" aria-atomic="true"></span>
     </div>
 
-    <div class="ak-btn-group" style="margin-top:0.4rem;">
+    <div class="ak-btn-group" style="margin-top:0.5rem;">
       <input type="file" id="bestand-import" accept=".json,application/json" aria-label="Importeer kaart vanuit JSON-bestand">
-      <button type="button" class="ak-btn ak-btn--muted" id="btn-import">Importeer eerdere kaart (.json)</button>
-      <button type="button" class="ak-btn ak-btn--danger" id="btn-verwijder">Verwijder alles van dit apparaat</button>
+      <button type="button" class="btn-muted" id="btn-import">Importeer eerdere kaart (.json)</button>
+      <button type="button" class="btn-danger" id="btn-verwijder">Verwijder alles van dit apparaat</button>
     </div>
     <p class="ak-import-error" id="import-fout" role="alert"></p>
   </section>
@@ -102,7 +156,7 @@
       <p class="ak-card-preview-label" id="preview-label">Mijn kaart &middot; Anker &amp; Kompas</p>
       <div class="ak-card-block">
         <div class="ak-card-block-label">Mijn anker</div>
-        <div class="ak-card-block-text ak-empty" id="preview-anker" data-leeg="Als het onrustig wordt, mag ik mezelf herinneren aan...">Als het onrustig wordt, mag ik mezelf herinneren aan...</div>
+        <div class="ak-card-block-text ak-empty" id="preview-anker" data-leeg="Als het onrustig wordt, mag ik mezelf herinneren aan…">Als het onrustig wordt, mag ik mezelf herinneren aan…</div>
       </div>
       <div class="ak-card-block">
         <div class="ak-card-block-label">Mijn kompas</div>
@@ -123,11 +177,11 @@
       </div>
       <div class="ak-card-block">
         <div class="ak-card-block-label">Mijn compassiezin</div>
-        <div class="ak-card-block-text ak-empty" id="preview-compassiezin" data-leeg="Wanneer het niet perfect gaat, mag ik tegen mezelf zeggen...">Wanneer het niet perfect gaat, mag ik tegen mezelf zeggen...</div>
+        <div class="ak-card-block-text ak-empty" id="preview-compassiezin" data-leeg="Wanneer het niet perfect gaat, mag ik tegen mezelf zeggen…">Wanneer het niet perfect gaat, mag ik tegen mezelf zeggen…</div>
       </div>
       <div class="ak-card-block">
         <div class="ak-card-block-label">Mijn kleine stap</div>
-        <div class="ak-card-block-text ak-empty" id="preview-kleineStap" data-leeg="Deze week of maand kies ik voor...">Deze week of maand kies ik voor...</div>
+        <div class="ak-card-block-text ak-empty" id="preview-kleineStap" data-leeg="Deze week of maand kies ik voor…">Deze week of maand kies ik voor…</div>
       </div>
     </div>
   </section>
