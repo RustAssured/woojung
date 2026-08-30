@@ -5,15 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anker &amp; Kompas</title>
   <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="Een rustige digitale reflectieplek voor de workshop Anker en Kompas. Privé. Lokaal. Van jou.">
-  <!-- Geen externe scripts, fonts of analytics -->
-  <link rel="stylesheet" href="ak-style.css">
+  <meta name="description" content="Een rustige digitale reflectieplek voor de workshop Anker en Kompas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    nav { position: sticky !important; top: 0; background: rgba(247,244,239,0.97) !important; backdrop-filter: blur(8px); border-bottom: 0.5px solid rgba(111,143,136,0.18) !important; z-index: 100; }
+    .nav-ak { font-size: 14px !important; letter-spacing: 2px !important; }
+    .nav-current { color: var(--celadon-dark) !important; border-bottom: 1px solid var(--gold) !important; }
+    .ak-main  { max-width: 700px; margin: 0 auto; padding: 4rem 1.75rem; }
+    .ak-section { margin-bottom: 4rem; }
+    .ak-label { display: block; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+    .ak-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 2.9rem); font-weight: 300; color: var(--ink); line-height: 1.15; margin-bottom: 0.5rem; }
+    .ak-title em { font-style: italic; color: var(--celadon-dark); }
+    .ak-subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.05rem, 2.5vw, 1.25rem); color: var(--ink-mid); margin-bottom: 1.75rem; line-height: 1.45; }
+    .ak-lead { font-size: 16px; line-height: 1.88; color: var(--ink-mid); }
+    .ak-divider { width: 36px; height: 1.5px; background: var(--gold); margin: 1.75rem 0; opacity: 0.65; }
+    .ak-privacy-box { background: rgba(111,143,136,0.07); border: 0.5px solid rgba(168,197,188,0.4); border-radius: 12px; padding: 1rem 1.75rem; font-size: 15px; color: var(--ink-mid); line-height: 1.7; }
+    .ak-privacy-box strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic; color: var(--celadon-dark); margin-bottom: 0.4rem; }
+    .ak-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.75rem 0; }
+    .ak-pillar { background: var(--white); border: 0.5px solid rgba(168,197,188,0.25); border-radius: 12px; padding: 1.75rem 1rem; }
+    .ak-pillar-nr { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.45rem; }
+    .ak-pillar p { font-size: 14px; color: var(--ink-soft); line-height: 1.65; margin-top: 0.3rem; }
+    h2.ak-section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 300; color: var(--ink); margin-bottom: 1.75rem; line-height: 1.2; }
+    h3.ak-block-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: var(--celadon-dark); margin-bottom: 0.4rem; }
+    .ak-home-cta { display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center; margin-top: 2.5rem; }
+    .ak-footer { margin-top: 6rem; padding: 2.75rem 1.75rem; border-top: 0.5px solid rgba(111,143,136,0.15); text-align: center; font-size: 12px; color: var(--ink-soft); line-height: 1.65; }
+    .ak-footer a { color: var(--celadon-dark); text-decoration: none; border-bottom: 1px solid rgba(45,107,98,0.3); }
+    @media (max-width: 640px) {
+      nav { padding: 0.9rem 1.1rem !important; }
+      .ak-main { padding: 2.5rem 1.1rem; }
+      .ak-pillars { grid-template-columns: 1fr; }
+      .ak-home-cta { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
 </head>
 <body>
 
-<nav class="ak-nav" role="navigation" aria-label="Hoofdnavigatie">
-  <a href="index.html" class="ak-nav-brand ak-current" aria-current="page">Anker &amp; Kompas</a>
-  <ul class="ak-nav-links" role="list">
+<nav>
+  <a class="nav-name nav-ak" href="../index.html">Anker &amp; Kompas</a>
+  <ul class="nav-links">
     <li><a href="checkin.html">Check-in</a></li>
     <li><a href="kaart.html">Mijn kaart</a></li>
     <li><a href="zelfkompassie.html">Zelfkompassie</a></li>
@@ -27,17 +58,14 @@
     <span class="ak-label">Workshop reflectie</span>
     <h1 class="ak-title" id="paginatitel">Anker &amp; <em>Kompas</em></h1>
     <p class="ak-subtitle">Een kleine plek om terug te keren naar wat ertoe doet.</p>
-
     <div class="ak-divider" aria-hidden="true"></div>
-
     <p class="ak-lead">
       Deze plek is geen opdracht, geen meting en geen formulier dat ergens naartoe wordt gestuurd. Het is een rustige digitale plek om opnieuw stil te staan bij je anker, je kompas en je kleine stap. Alles wat je invult blijft van jou en wordt alleen opgeslagen in deze browser op dit apparaat.
     </p>
-
     <nav class="ak-home-cta" aria-label="Beginopties">
-      <a href="checkin.html" class="ak-btn ak-btn--primary">Begin mijn reflectie</a>
-      <a href="kaart.html" class="ak-btn ak-btn--ghost">Ga naar mijn kaart</a>
-      <a href="privacy.html" class="ak-btn ak-btn--muted">Privacy</a>
+      <a href="checkin.html" class="btn-primary">Begin mijn reflectie</a>
+      <a href="kaart.html" class="btn-ghost">Ga naar mijn kaart</a>
+      <a href="privacy.html" class="btn-ghost">Privacy</a>
     </nav>
   </section>
 
@@ -76,6 +104,5 @@
   <p style="margin-top:0.4rem;">Jouw antwoorden verlaten dit apparaat nooit. <a href="privacy.html">Meer over privacy</a></p>
 </footer>
 
-<!-- Geen externe scripts. Geen tracking. -->
 </body>
 </html>
