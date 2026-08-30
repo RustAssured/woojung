@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check-in &middot; Anker &amp; Kompas</title>
+  <meta name="robots" content="noindex, nofollow">
+  <!-- Geen externe scripts, fonts of analytics -->
+  <link rel="stylesheet" href="ak-style.css">
+</head>
+<body>
+
+<nav class="ak-nav" role="navigation" aria-label="Hoofdnavigatie">
+  <a href="index.html" class="ak-nav-brand">Anker &amp; Kompas</a>
+  <ul class="ak-nav-links" role="list">
+    <li><a href="checkin.html" class="ak-current" aria-current="page">Check-in</a></li>
+    <li><a href="kaart.html">Mijn kaart</a></li>
+    <li><a href="zelfkompassie.html">Zelfkompassie</a></li>
+    <li><a href="privacy.html">Privacy</a></li>
+  </ul>
+</nav>
+
+<main class="ak-main" id="hoofdinhoud">
+
+  <section class="ak-section" aria-labelledby="paginatitel">
+    <span class="ak-label">Stap 1</span>
+    <h1 class="ak-title" id="paginatitel">Check-<em>in</em></h1>
+    <p class="ak-subtitle">Hoe ben je hier? Niet hoe het hoort, maar hoe het is.</p>
+    <div class="ak-divider" aria-hidden="true"></div>
+    <p class="ak-prose">Neem even de tijd voor jezelf. Je hoeft niets goed of compleet in te vullen. Schrijf wat er is, ook als dat 'weinig' voelt.</p>
+  </section>
+
+  <section class="ak-section" aria-label="Check-in vragen">
+
+    <!-- ankerKompas.checkin wordt opgeslagen in localStorage -->
+    <div id="checkin-form">
+
+      <div class="ak-field">
+        <label for="hoeKomIkHier">Hoe kom ik hier nu aan?</label>
+        <span class="ak-hint">Qua energie, stemming, gedachten, lichaam.</span>
+        <textarea
+          id="hoeKomIkHier"
+          name="hoeKomIkHier"
+          class="ak-tall"
+          rows="4"
+          autocomplete="off"
+          spellcheck="true"
+          placeholder="Schrijf wat er nu is..."
+          aria-describedby="hint-hoe"></textarea>
+        <span id="hint-hoe" class="ak-hint" hidden>Qua energie, stemming, gedachten, lichaam.</span>
+      </div>
+
+      <div class="ak-field">
+        <label for="watBeweegt">Wat beweegt er op dit moment in mijn werk of leven?</label>
+        <textarea
+          id="watBeweegt"
+          name="watBeweegt"
+          rows="4"
+          autocomplete="off"
+          spellcheck="true"
+          placeholder="Wat draag ik mee vandaag..."></textarea>
+      </div>
+
+      <div class="ak-field">
+        <label for="watVraagt">Wat vraagt aandacht?</label>
+        <textarea
+          id="watVraagt"
+          name="watVraagt"
+          rows="3"
+          autocomplete="off"
+          spellcheck="true"
+          placeholder="Wat dringt zich op, ook als het klein voelt..."></textarea>
+      </div>
+
+      <div class="ak-field">
+        <label for="watMagNiet">Wat mag ik nu even niet hoeven oplossen?</label>
+        <span class="ak-hint">Wat mag je voor nu parkeren?</span>
+        <textarea
+          id="watMagNiet"
+          name="watMagNiet"
+          rows="3"
+          autocomplete="off"
+          spellcheck="true"
+          placeholder="Wat hoeft nu even niet..."></textarea>
+      </div>
+
+    </div><!-- /checkin-form -->
+
+    <div class="ak-btn-group" role="group" aria-label="Acties">
+      <button type="button" class="ak-btn ak-btn--primary" id="btn-opslaan">
+        Bewaar op dit apparaat
+      </button>
+      <span class="ak-notice" id="opslaan-melding" aria-live="polite" aria-atomic="true"></span>
+    </div>
+
+    <div class="ak-divider" aria-hidden="true"></div>
+
+    <div class="ak-btn-group">
+      <a href="kaart.html" class="ak-btn ak-btn--ghost">
+        Ga naar mijn kaart &rarr;
+      </a>
+      <button type="button" class="ak-btn ak-btn--danger" id="btn-verwijder">
+        Verwijder alles van dit apparaat
+      </button>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="ak-footer">
+  <p>Jouw antwoorden worden alleen lokaal opgeslagen. <a href="privacy.html">Privacy</a></p>
+</footer>
+
+<script src="ak-app.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var form   = document.getElementById('checkin-form');
+  var melding = document.getElementById('opslaan-melding');
+
+  /* Velden laden vanuit localStorage (ankerKompas.checkin) */
+  var opgeslagen = AK.load(AK.KEYS.CHECKIN);
+  if (opgeslagen) AK.populateForm(form, opgeslagen);
+
+  /* Opslaan bij klik op knop */
+  document.getElementById('btn-opslaan').addEventListener('click', function () {
+    var data = AK.collectForm(form);
+    AK.save(AK.KEYS.CHECKIN, data);
+    AK.showNotice(melding, 'Opgeslagen op dit apparaat.');
+  });
+
+  /* Auto-opslaan bij elke invoer (debounced, 800ms) */
+  var autoOpslaan = AK.debounce(function () {
+    AK.save(AK.KEYS.CHECKIN, AK.collectForm(form));
+  }, 800);
+  form.addEventListener('input', autoOpslaan);
+
+  /* Verwijder-knop */
+  AK.koppelVerwijderKnop(
+    document.getElementById('btn-verwijder'),
+    function () {
+      AK.populateForm(form, { hoeKomIkHier: '', watBeweegt: '', watVraagt: '', watMagNiet: '' });
+      AK.showNotice(melding, 'Alle gegevens verwijderd van dit apparaat.');
+    }
+  );
+
+})();
+</script>
+
+</body>
+</html>

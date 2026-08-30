@@ -1,0 +1,598 @@
+/*
+ * ak-style.css — Anker & Kompas subsite
+ * Geen externe bronnen: geen @import, geen CDN, geen webfonts.
+ * Alle lettertypes zijn systeemfonts.
+ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Kleurenpalet — warm en aards */
+  --bg:           #F7F4EF;
+  --bg-alt:       #EDE8DF;
+  --bg-card:      #FDFBF8;
+  --ink:          #2A2522;
+  --ink-mid:      #3a3832;
+  --ink-soft:     #6B6258;
+  --ink-muted:    #9A9088;
+  --accent:       #3d5a4f;
+  --accent-hover: #2d4840;
+  --accent-light: #a8c5bc;
+  --accent-pale:  #dce8e4;
+  --gold:         #C9A76A;
+  --warm-line:    rgba(200, 184, 154, 0.38);
+  --border:       rgba(0, 0, 0, 0.09);
+  --border-focus: rgba(61, 90, 79, 0.4);
+  --danger:       #8c4a3a;
+
+  /* Lettertypes — alleen systeemfonts */
+  --font-heading: Georgia, 'Book Antiqua', Palatino, 'Palatino Linotype', serif;
+  --font-body:    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                  'Helvetica Neue', Arial, sans-serif;
+
+  /* Ruimte */
+  --sp-xs:  0.5rem;
+  --sp-sm:  1rem;
+  --sp-md:  1.75rem;
+  --sp-lg:  2.75rem;
+  --sp-xl:  4rem;
+  --sp-2xl: 6rem;
+
+  --radius:      4px;
+  --radius-card: 10px;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  background: var(--bg);
+  color: var(--ink-mid);
+  line-height: 1.78;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ═══════════════════ NAV ═══════════════════ */
+
+.ak-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 2rem;
+  border-bottom: 1px solid var(--warm-line);
+  background: rgba(247, 244, 239, 0.96);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.ak-nav-brand {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: normal;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+.ak-nav-brand:hover { color: var(--accent-hover); }
+
+.ak-nav-links {
+  display: flex;
+  gap: 1.25rem;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.ak-nav-links a {
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.ak-nav-links a:hover         { color: var(--accent); border-bottom-color: var(--accent-light); }
+.ak-nav-links a.ak-current    { color: var(--accent); border-bottom-color: var(--gold); }
+
+/* ═══════════════════ LAYOUT ═══════════════════ */
+
+.ak-main {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: var(--sp-xl) var(--sp-md);
+}
+
+.ak-main--wide { max-width: 920px; }
+
+.ak-section { margin-bottom: var(--sp-xl); }
+
+/* ═══════════════════ TYPOGRAFIE ═══════════════════ */
+
+.ak-label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.1rem;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  font-weight: normal;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.ak-title {
+  font-size: clamp(2rem, 5vw, 2.9rem);
+  margin-bottom: 0.6rem;
+}
+.ak-title em { font-style: italic; color: var(--accent); }
+
+.ak-subtitle {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+  color: var(--ink-soft);
+  margin-bottom: var(--sp-md);
+  line-height: 1.45;
+}
+
+.ak-lead {
+  font-size: 1.02rem;
+  line-height: 1.88;
+  color: var(--ink-mid);
+  max-width: 560px;
+}
+
+.ak-prose {
+  font-size: 0.97rem;
+  line-height: 1.85;
+  color: var(--ink-mid);
+}
+.ak-prose p + p { margin-top: 1rem; }
+
+h2.ak-section-title {
+  font-size: clamp(1.35rem, 3vw, 1.9rem);
+  margin-bottom: var(--sp-md);
+}
+
+h3.ak-block-title {
+  font-size: 1.08rem;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+
+.ak-divider {
+  width: 36px;
+  height: 1px;
+  background: var(--gold);
+  margin: var(--sp-md) 0;
+  opacity: 0.55;
+}
+
+/* ═══════════════════ FORMULIERELEMENTEN ═══════════════════ */
+
+.ak-field { margin-bottom: var(--sp-md); }
+
+.ak-field label {
+  display: block;
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.03rem;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.ak-field .ak-hint {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.55rem;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.ak-field textarea,
+.ak-field input[type="text"] {
+  width: 100%;
+  padding: 0.8rem 0.95rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink-mid);
+  line-height: 1.7;
+  resize: vertical;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.ak-field textarea:focus,
+.ak-field input[type="text"]:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(61, 90, 79, 0.09);
+}
+
+.ak-field textarea          { min-height: 100px; }
+.ak-field textarea.ak-tall  { min-height: 150px; }
+
+/* Groep van samenhangende velden (bijv. kompas-subvelden) */
+.ak-field-group {
+  border: 1px solid var(--warm-line);
+  border-radius: var(--radius-card);
+  padding: var(--sp-md);
+  background: var(--bg-card);
+  margin-bottom: var(--sp-md);
+}
+.ak-field-group .ak-field { margin-bottom: var(--sp-sm); }
+.ak-field-group .ak-field:last-child { margin-bottom: 0; }
+.ak-field-group-title {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--sp-sm);
+}
+
+/* ═══════════════════ KNOPPEN ═══════════════════ */
+
+.ak-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.7rem 1.6rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  text-decoration: none;
+  white-space: nowrap;
+  -webkit-appearance: none;
+  line-height: 1.4;
+}
+.ak-btn:hover  { transform: translateY(-1px); }
+.ak-btn:active { transform: none; }
+.ak-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.ak-btn--primary {
+  background: var(--accent);
+  color: #e8ede9;
+}
+.ak-btn--primary:hover { background: var(--accent-hover); }
+
+.ak-btn--ghost {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent-light);
+}
+.ak-btn--ghost:hover { background: var(--accent-pale); }
+
+.ak-btn--muted {
+  background: transparent;
+  color: var(--ink-soft);
+  border: 1px solid var(--border);
+  font-size: 0.8rem;
+}
+.ak-btn--muted:hover { color: var(--ink-mid); border-color: var(--ink-soft); }
+
+.ak-btn--danger {
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid rgba(140, 74, 58, 0.28);
+  font-size: 0.8rem;
+}
+.ak-btn--danger:hover { background: rgba(140, 74, 58, 0.05); }
+
+.ak-btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: var(--sp-md);
+  align-items: center;
+}
+
+/* ═══════════════════ MELDING (opgeslagen) ═══════════════════ */
+
+.ak-notice {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  background: var(--accent-pale);
+  color: var(--accent);
+  border: 1px solid var(--accent-light);
+  font-size: 0.8rem;
+  border-radius: var(--radius);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  vertical-align: middle;
+}
+.ak-notice.ak-visible { opacity: 1; }
+
+/* ═══════════════════ KAARTPREVIEW ═══════════════════ */
+
+.ak-card-preview {
+  background: var(--bg-card);
+  border: 1px solid var(--warm-line);
+  border-radius: var(--radius-card);
+  padding: var(--sp-lg) var(--sp-lg);
+  margin-top: var(--sp-xl);
+  position: relative;
+  overflow: hidden;
+}
+.ak-card-preview::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-light), var(--gold));
+  opacity: 0.7;
+}
+
+.ak-card-preview-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: var(--sp-md);
+  font-style: italic;
+  font-family: var(--font-heading);
+}
+
+.ak-card-block {
+  margin-bottom: var(--sp-md);
+  padding-bottom: var(--sp-md);
+  border-bottom: 1px solid var(--warm-line);
+}
+.ak-card-block:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.ak-card-block-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.35rem;
+}
+
+.ak-card-block-text {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--ink);
+  line-height: 1.65;
+  white-space: pre-wrap;
+  word-break: break-word;
+  min-height: 1.65em;
+}
+.ak-card-block-text.ak-empty {
+  color: var(--ink-muted);
+  font-style: normal;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+}
+
+/* Kompas sub-blokken in preview */
+.ak-card-kompas {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--sp-sm);
+  margin-top: 0.5rem;
+}
+.ak-card-kompas-item {}
+.ak-card-kompas-item .ak-card-block-label { font-size: 0.62rem; }
+
+/* ═══════════════════ INFO- EN PRIVACYBLOKKEN ═══════════════════ */
+
+.ak-info-block {
+  background: var(--bg-card);
+  border-left: 3px solid var(--accent-light);
+  padding: var(--sp-sm) var(--sp-md);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin-bottom: var(--sp-md);
+}
+
+.ak-privacy-box {
+  background: var(--accent-pale);
+  border: 1px solid var(--accent-light);
+  border-radius: var(--radius-card);
+  padding: var(--sp-sm) var(--sp-md);
+  font-size: 0.88rem;
+  color: var(--ink-mid);
+  line-height: 1.7;
+}
+.ak-privacy-box strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-style: italic;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+.ak-privacy-box p + p { margin-top: 0.45rem; }
+
+.ak-privacy-list {
+  list-style: none;
+  margin: var(--sp-md) 0;
+}
+.ak-privacy-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--warm-line);
+  font-size: 0.93rem;
+  line-height: 1.55;
+}
+.ak-privacy-list li:last-child { border-bottom: none; }
+.ak-privacy-list .ak-check {
+  color: var(--accent);
+  font-size: 0.82rem;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  font-weight: 600;
+}
+
+/* ═══════════════════ DRIE PIJLERS ═══════════════════ */
+
+.ak-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-sm);
+  margin: var(--sp-md) 0;
+}
+
+.ak-pillar {
+  background: var(--bg-card);
+  border: 1px solid var(--warm-line);
+  border-radius: var(--radius-card);
+  padding: var(--sp-md) var(--sp-sm);
+}
+.ak-pillar-nr {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.45rem;
+}
+.ak-pillar p {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  margin-top: 0.35rem;
+}
+
+/* ═══════════════════ ZELFKOMPASSIE-BLOKKEN ═══════════════════ */
+
+.ak-compassie-blok {
+  background: var(--bg-card);
+  border: 1px solid var(--warm-line);
+  border-radius: var(--radius-card);
+  padding: var(--sp-md);
+  margin-bottom: var(--sp-md);
+}
+.ak-compassie-blok-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: var(--sp-sm);
+}
+.ak-compassie-nr {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.ak-compassie-tekst {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  margin-bottom: var(--sp-sm);
+}
+
+/* ═══════════════════ HOME CTA ═══════════════════ */
+
+.ak-home-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: var(--sp-lg);
+}
+
+/* ═══════════════════ VOETTEKST ═══════════════════ */
+
+.ak-footer {
+  margin-top: var(--sp-2xl);
+  padding: var(--sp-lg) var(--sp-md);
+  border-top: 1px solid var(--warm-line);
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  line-height: 1.65;
+}
+.ak-footer a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-light);
+}
+
+/* ═══════════════════ PRINT ═══════════════════ */
+
+@media print {
+  .ak-nav,
+  .ak-btn-group,
+  .ak-field,
+  .ak-field-group,
+  .ak-footer,
+  .ak-notice,
+  .ak-privacy-box,
+  .ak-home-cta,
+  .ak-compassie-blok .ak-field {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+    font-size: 12pt;
+  }
+
+  .ak-main {
+    max-width: 100%;
+    padding: 1cm 1.5cm;
+  }
+
+  .ak-card-preview {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-top: 1cm;
+  }
+  .ak-card-preview::before { display: none; }
+  .ak-card-block { page-break-inside: avoid; }
+  .ak-card-block-text { font-size: 12pt; }
+
+  .ak-title, .ak-subtitle, .ak-label, .ak-card-preview-label { display: block !important; }
+}
+
+/* ═══════════════════ RESPONSIVE ═══════════════════ */
+
+@media (max-width: 640px) {
+  .ak-nav          { padding: 0.9rem 1.1rem; }
+  .ak-nav-links    { gap: 0.85rem; }
+  .ak-main         { padding: 2.5rem 1.1rem; }
+  .ak-pillars      { grid-template-columns: 1fr; }
+  .ak-btn-group    { flex-direction: column; align-items: flex-start; }
+  .ak-home-cta     { flex-direction: column; }
+  .ak-card-preview { padding: var(--sp-md); }
+  .ak-card-kompas  { grid-template-columns: 1fr; }
+}

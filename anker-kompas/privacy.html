@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy &middot; Anker &amp; Kompas</title>
+  <meta name="robots" content="noindex, nofollow">
+  <!-- Geen externe scripts, fonts of analytics -->
+  <link rel="stylesheet" href="ak-style.css">
+</head>
+<body>
+
+<nav class="ak-nav" role="navigation" aria-label="Hoofdnavigatie">
+  <a href="index.html" class="ak-nav-brand">Anker &amp; Kompas</a>
+  <ul class="ak-nav-links" role="list">
+    <li><a href="checkin.html">Check-in</a></li>
+    <li><a href="kaart.html">Mijn kaart</a></li>
+    <li><a href="zelfkompassie.html">Zelfkompassie</a></li>
+    <li><a href="privacy.html" class="ak-current" aria-current="page">Privacy</a></li>
+  </ul>
+</nav>
+
+<main class="ak-main" id="hoofdinhoud">
+
+  <section class="ak-section" aria-labelledby="paginatitel">
+    <span class="ak-label">Jouw gegevens</span>
+    <h1 class="ak-title" id="paginatitel">Privacy &amp; <em>veiligheid</em></h1>
+    <div class="ak-divider" aria-hidden="true"></div>
+    <p class="ak-prose">Deze pagina legt precies uit wat er met je gegevens gebeurt als je Anker &amp; Kompas gebruikt. Kort gezegd: alles blijft lokaal op jouw apparaat.</p>
+  </section>
+
+  <!-- KERNPUNTEN -->
+  <section class="ak-section" aria-labelledby="kernpunten-titel">
+    <h2 class="ak-section-title" id="kernpunten-titel">Wat je moet weten</h2>
+
+    <div class="ak-privacy-box" role="note">
+      <strong>Jouw antwoorden verlaten dit apparaat nooit.</strong>
+      <p>Wat je hier invult wordt alleen opgeslagen in de browser op dit apparaat. Er wordt niets verstuurd naar een server, een database of een derde partij.</p>
+    </div>
+
+    <div class="ak-prose" style="margin-top: 1.5rem;">
+
+      <h3 class="ak-block-title" style="margin-bottom:0.4rem;">Geen account</h3>
+      <p>Deze site heeft geen accounts, geen wachtwoorden en geen registratie. Er is geen manier om te weten wie je bent.</p>
+
+      <h3 class="ak-block-title" style="margin-top:1.2rem; margin-bottom:0.4rem;">Geen database</h3>
+      <p>Deze site heeft geen database aan de serverzijde. Er wordt niets opgeslagen buiten jouw eigen browser.</p>
+
+      <h3 class="ak-block-title" style="margin-top:1.2rem; margin-bottom:0.4rem;">Geen verzending</h3>
+      <p>Je antwoorden worden <strong>niet</strong> verstuurd. Niet bij het opslaan, niet bij het navigeren, niet bij het sluiten van de pagina.</p>
+
+      <h3 class="ak-block-title" style="margin-top:1.2rem; margin-bottom:0.4rem;">Opslag in localStorage</h3>
+      <p>Je antwoorden worden opgeslagen in <code>localStorage</code> van deze browser op dit apparaat. De gegevens blijven staan totdat je ze zelf verwijdert — zelfs als je de browser sluit of het tabblad sluit.</p>
+      <p style="margin-top:0.6rem;">De volgende sleutels worden gebruikt:</p>
+      <ul style="margin: 0.5rem 0 0 1.2rem; line-height: 1.8;">
+        <li><code>ankerKompas.checkin</code> — je check-in antwoorden</li>
+        <li><code>ankerKompas.card</code> — je persoonlijke anker- en kompaskaart</li>
+        <li><code>ankerKompas.zelfrefl</code> — je zelfcompassie reflectie</li>
+      </ul>
+
+      <h3 class="ak-block-title" style="margin-top:1.2rem; margin-bottom:0.4rem;">Toegang van anderen</h3>
+      <p>Wie toegang heeft tot dit apparaat en deze browser kan mogelijk de opgeslagen tekst zien via de ontwikkelaarstool van de browser. Gebruik je een gedeeld apparaat? Klik dan op <strong>Verwijder alles van dit apparaat</strong> als je klaar bent.</p>
+
+      <h3 class="ak-block-title" style="margin-top:1.2rem; margin-bottom:0.4rem;">Geen tracking of cookies</h3>
+      <p>Deze site gebruikt geen analytics, geen cookies, geen tracking en geen externe scripts. Er worden geen gegevens gedeeld met derden. Er is geen advertentienetwerk betrokken.</p>
+
+      <h3 class="ak-block-title" style="margin-top:1.2rem; margin-bottom:0.4rem;">Geen externe bronnen</h3>
+      <p>Alle bestanden (HTML, CSS, JavaScript) worden geladen van dezelfde server als deze pagina. Er worden geen externe lettertypen, CDN-bibliotheken of externe API's gebruikt.</p>
+
+    </div>
+  </section>
+
+  <!-- VERWIJDEREN -->
+  <section class="ak-section" aria-labelledby="verwijder-titel">
+    <h2 class="ak-section-title" id="verwijder-titel">Je gegevens verwijderen</h2>
+    <p class="ak-prose">Gebruik de knop <strong>Verwijder alles van dit apparaat</strong> op een van de pagina's om al je opgeslagen antwoorden te wissen. Dit verwijdert alle drie de localStorage-sleutels hierboven. Dit kan niet ongedaan worden gemaakt.</p>
+    <div class="ak-btn-group" style="margin-top:1rem;">
+      <a href="checkin.html" class="ak-btn ak-btn--ghost">Naar check-in</a>
+      <a href="kaart.html" class="ak-btn ak-btn--ghost">Naar mijn kaart</a>
+      <a href="zelfkompassie.html" class="ak-btn ak-btn--ghost">Naar zelfkompassie</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ak-footer">
+  <p>Jouw antwoorden worden alleen lokaal opgeslagen. <a href="privacy.html">Privacy</a></p>
+</footer>
+
+<!-- Geen externe scripts. Geen tracking. -->
+</body>
+</html>

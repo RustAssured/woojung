@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zelfkompassie &middot; Anker &amp; Kompas</title>
+  <meta name="robots" content="noindex, nofollow">
+  <!-- Geen externe scripts, fonts of analytics -->
+  <link rel="stylesheet" href="ak-style.css">
+</head>
+<body>
+
+<nav class="ak-nav" role="navigation" aria-label="Hoofdnavigatie">
+  <a href="index.html" class="ak-nav-brand">Anker &amp; Kompas</a>
+  <ul class="ak-nav-links" role="list">
+    <li><a href="checkin.html">Check-in</a></li>
+    <li><a href="kaart.html">Mijn kaart</a></li>
+    <li><a href="zelfkompassie.html" class="ak-current" aria-current="page">Zelfkompassie</a></li>
+    <li><a href="privacy.html">Privacy</a></li>
+  </ul>
+</nav>
+
+<main class="ak-main" id="hoofdinhoud">
+
+  <section class="ak-section" aria-labelledby="paginatitel">
+    <span class="ak-label">Kompas hervinden</span>
+    <h1 class="ak-title" id="paginatitel">Zelf<em>compassie</em></h1>
+    <div class="ak-divider" aria-hidden="true"></div>
+
+    <div class="ak-prose">
+      <p>Zelfcompassie betekent: je kompas hervinden vanuit compassie, juist wanneer je onder druk staat. Het gaat niet over jezelf zielig vinden of alles goedpraten.</p>
+      <p>Het gaat over opmerken wat er is, herkennen dat zoeken en worstelen menselijk is, en jezelf vriendelijk genoeg benaderen om een kleine stap te kunnen zetten richting wat ertoe doet.</p>
+    </div>
+  </section>
+
+  <!-- DRIE ELEMENTEN VAN ZELFCOMPASSIE -->
+  <section class="ak-section" aria-labelledby="drie-elementen">
+    <h2 class="ak-section-title" id="drie-elementen">Drie bewegingen</h2>
+
+    <!-- ankerKompas.zelfrefl wordt opgeslagen in localStorage -->
+    <div id="zelfrefl-form">
+
+      <!-- 01 Opmerken -->
+      <article class="ak-compassie-blok">
+        <div class="ak-compassie-blok-header">
+          <span class="ak-compassie-nr" aria-hidden="true">01</span>
+          <h3 class="ak-block-title">Opmerken</h3>
+        </div>
+        <p class="ak-compassie-tekst">
+          <em>Wat gebeurt er nu in mij?</em> Niet wegredeneren, niet dramatiseren. Gewoon zien wat er is.
+        </p>
+        <div class="ak-field">
+          <label for="opmerken">Wat merk ik nu op in mezelf?</label>
+          <textarea
+            id="opmerken"
+            name="opmerken"
+            rows="3"
+            autocomplete="off"
+            spellcheck="true"
+            placeholder="Gedachten, gevoelens, lichaamssensaties..."></textarea>
+        </div>
+      </article>
+
+      <!-- 02 Menselijkheid herkennen -->
+      <article class="ak-compassie-blok">
+        <div class="ak-compassie-blok-header">
+          <span class="ak-compassie-nr" aria-hidden="true">02</span>
+          <h3 class="ak-block-title">Menselijkheid herkennen</h3>
+        </div>
+        <p class="ak-compassie-tekst">
+          <em>Wat ik ervaar hoort ook bij mens-zijn.</em> Ik ben niet de enige die dit kent. Anderen worstelen ook. Dat is geen zwakte, dat is leven.
+        </p>
+        <div class="ak-field">
+          <label for="menselijkheid">Wat herken ik als iets menselijks en niet als persoonlijk falen?</label>
+          <textarea
+            id="menselijkheid"
+            name="menselijkheid"
+            rows="3"
+            autocomplete="off"
+            spellcheck="true"
+            placeholder="Dit hoort erbij, voor iedereen..."></textarea>
+        </div>
+      </article>
+
+      <!-- 03 Mild reageren -->
+      <article class="ak-compassie-blok">
+        <div class="ak-compassie-blok-header">
+          <span class="ak-compassie-nr" aria-hidden="true">03</span>
+          <h3 class="ak-block-title">Mild reageren</h3>
+        </div>
+        <p class="ak-compassie-tekst">
+          <em>Wat zou ik tegen een gewaardeerde collega zeggen?</em> Iemand die ervaart wat ik nu ervaar. Dat is de toon die ik ook aan mezelf mag gunnen.
+        </p>
+        <div class="ak-field">
+          <label for="collega">Wat zou ik zeggen tegen een goede collega die ervaart wat ik nu ervaar?</label>
+          <textarea
+            id="collega"
+            name="collega"
+            rows="3"
+            autocomplete="off"
+            spellcheck="true"
+            placeholder="Wat zou ik die persoon toewensen of zeggen?"></textarea>
+        </div>
+        <div class="ak-field">
+          <label for="gunst">Welke zin mag ik ook aan mezelf gunnen?</label>
+          <textarea
+            id="gunst"
+            name="gunst"
+            rows="2"
+            autocomplete="off"
+            spellcheck="true"
+            placeholder="Schrijf die zin voor jezelf op..."></textarea>
+        </div>
+      </article>
+
+    </div><!-- /zelfrefl-form -->
+
+    <div class="ak-btn-group" role="group" aria-label="Acties">
+      <button type="button" class="ak-btn ak-btn--primary" id="btn-opslaan">
+        Bewaar op dit apparaat
+      </button>
+      <span class="ak-notice" id="opslaan-melding" aria-live="polite" aria-atomic="true"></span>
+    </div>
+
+    <div class="ak-btn-group" style="margin-top:0.4rem;">
+      <a href="kaart.html" class="ak-btn ak-btn--ghost">
+        Terug naar mijn kaart
+      </a>
+      <button type="button" class="ak-btn ak-btn--danger" id="btn-verwijder">
+        Verwijder alles van dit apparaat
+      </button>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="ak-footer">
+  <p>Jouw antwoorden worden alleen lokaal opgeslagen. <a href="privacy.html">Privacy</a></p>
+</footer>
+
+<script src="ak-app.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var form    = document.getElementById('zelfrefl-form');
+  var melding = document.getElementById('opslaan-melding');
+
+  /* Laden vanuit localStorage (ankerKompas.zelfrefl) */
+  var opgeslagen = AK.load(AK.KEYS.ZELFREFL);
+  if (opgeslagen) AK.populateForm(form, opgeslagen);
+
+  /* Opslaan bij klik */
+  document.getElementById('btn-opslaan').addEventListener('click', function () {
+    AK.save(AK.KEYS.ZELFREFL, AK.collectForm(form));
+    AK.showNotice(melding, 'Opgeslagen op dit apparaat.');
+  });
+
+  /* Auto-opslaan bij invoer (debounced) */
+  form.addEventListener('input', AK.debounce(function () {
+    AK.save(AK.KEYS.ZELFREFL, AK.collectForm(form));
+  }, 800));
+
+  /* Verwijder alles */
+  AK.koppelVerwijderKnop(
+    document.getElementById('btn-verwijder'),
+    function () {
+      form.querySelectorAll('textarea').forEach(function (el) { el.value = ''; });
+      AK.showNotice(melding, 'Alle gegevens verwijderd van dit apparaat.');
+    }
+  );
+
+})();
+</script>
+
+</body>
+</html>
